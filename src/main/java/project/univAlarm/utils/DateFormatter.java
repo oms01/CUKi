@@ -7,6 +7,6 @@ import java.time.format.DateTimeFormatter;
 public class DateFormatter {
     public static String currentTimeFormatted(){
         return LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
+                .format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss.SSS"));
     }
 }

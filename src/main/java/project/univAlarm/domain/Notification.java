@@ -15,6 +15,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import project.univAlarm.crawler.CrawledNotificationDto;
 
 @Entity
 @Table(name = "notifications",
@@ -30,6 +31,9 @@ public class Notification {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "notification_type_id", nullable = false)
     private NotificationType notificationType;
+
+    @Column(name = "origin_id", nullable = false)
+    private Long originId;
 
     @Column(nullable = false)
     private String title;
@@ -47,11 +51,13 @@ public class Notification {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    public Notification(NotificationType notificationType, String title, String writer, String link, String date) {
+    public Notification(NotificationType notificationType, CrawledNotificationDto crawledNotificationDto) {
         this.notificationType = notificationType;
-        this.title = title;
-        this.writer = writer;
-        this.link = link;
-        this.date = date;
+        this.originId = crawledNotificationDto.getId();
+        this.title = crawledNotificationDto.getTitle();
+        this.writer = crawledNotificationDto.getWriter();
+        this.link = crawledNotificationDto.getLink();
+        this.date = crawledNotificationDto.getDate();
     }
+
 }

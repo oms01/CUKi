@@ -31,16 +31,16 @@ public class Notification {
     @JoinColumn(name = "notification_type_id", nullable = false)
     private NotificationType notificationType;
 
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String writer;
 
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false)
     private String link;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String date;
 
     @CreationTimestamp

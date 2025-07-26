@@ -24,13 +24,13 @@ public class NotificationType {
     @JoinColumn(name = "school_id", nullable = false)
     private School school;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String name;
 
     @Column(name = "is_department", nullable = false)
     private Boolean isDepartment;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false)
     private String url;
 
     @CreationTimestamp

@@ -6,8 +6,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 import project.univAlarm.crawler.CrawledNotificationDto;
 
+@Component
 public class CatholicUnivDefaultCrawler implements Crawler {
     @Override
     public ArrayList<CrawledNotificationDto> crawl(String baseUrl) throws IOException {

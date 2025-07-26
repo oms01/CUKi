@@ -25,13 +25,13 @@ public class UserDevice {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String name;
 
     @Column(nullable = false, length = 500)
     private String token;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     private String platform;
 
     @CreationTimestamp

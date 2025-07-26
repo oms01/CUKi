@@ -1,33 +1,30 @@
-package project.univAlarm.detector;
+package project.univAlarm.initialization;
 
 import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import project.univAlarm.crawler.CrawledNotificationDto;
+import project.univAlarm.detector.NotificationDetector;
 import project.univAlarm.service.NotificationService;
 import project.univAlarm.utils.DateFormatter;
 
-@Slf4j
 @Component
 @RequiredArgsConstructor
-@EnableScheduling
-public class DetectorManager {
+@Slf4j
+public class NotificationDataInitializer {
 
     private final List<NotificationDetector> detectors;
     private final NotificationService notificationService;
 
-    @Scheduled(fixedRate = 60 * 1000)
-    public void run() throws IOException {
-        long start = System.currentTimeMillis();
+    @Transactional
+    public void initializeNotificationData() throws IOException {
         for (NotificationDetector detector : detectors) {
-            List<CrawledNotificationDto> crawledNotificationDtos = detector.runDetector();
+            List<CrawledNotificationDto> crawledNotificationDtos = detector.initializeDetector();
             notificationService.saveNotifications(detector, crawledNotificationDtos);
         }
-        long end = System.currentTimeMillis();
-        log.info("[{}] {} Change Detector finished in {} ms", DateFormatter.currentTimeFormatted(), detectors.size(), end - start);
+        log.info("[{}] {} Detector initialized", DateFormatter.currentTimeFormatted(), detectors.size());
     }
 }

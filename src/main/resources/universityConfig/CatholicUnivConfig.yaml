@@ -1,0 +1,126 @@
+univ-config:
+  univ-list:
+    - univ-name: 가톨릭대학교
+      campuses:
+        - name: 성심교정
+          url: https://www.catholic.ac.kr/ko/index.do
+          default-crawler: catholicUnivDefaultCrawler
+          urls:
+            - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=20&srSearchKey=&srSearchVal=
+              name: 일반
+              department: false
+            - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=21&srSearchKey=&srSearchVal=
+              name: 학사
+              department: false
+            - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=22&srSearchKey=&srSearchVal=
+              name: 장학
+              department: false
+            - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=23&srSearchKey=&srSearchVal=
+              name: 취창업
+              department: false
+            - url: https://chemistry.catholic.ac.kr/chemistry/community/notice.do
+              name: 화학과
+            - url: https://math.catholic.ac.kr/math/community/notice.do
+              name: 수학과
+            - url: https://physics.catholic.ac.kr/physics/community/notice.do
+              name: 물리학과
+            - url: https://design.catholic.ac.kr/design/community/notice.do
+              name: 공간디자인소비학과
+            - url: https://clothing.catholic.ac.kr/clothing/community/notice.do
+              name: 의류학과
+            - url: https://fn.catholic.ac.kr/fn/community/notice.do
+              name: 식품영양학과
+            - url: https://csie.catholic.ac.kr/csie/community/notice.do
+              name: 컴퓨터정보공학부
+            - url: https://mtc.catholic.ac.kr/mtc/community/notice.do
+              name: 미디어기술콘텐츠학과
+            - url: https://ice.catholic.ac.kr/ice/community/notice.do
+              name: 정보통신전자공학부
+            - url: https://biotech.catholic.ac.kr/biotech/community/notice.do
+              name: 생명공학과
+            - url: https://envi.catholic.ac.kr/envi/community/notice.do
+              name: 에너지환경공학과
+            - url: https://bmce.catholic.ac.kr/bmce/community/notice.do
+              name: 바이오메디컬화학공학과
+            - url: https://ai.catholic.ac.kr/ai/community/notice.do
+              name: 인공지능학과
+            - url: https://datascience.catholic.ac.kr/datascience/community/notice.do
+              name: 데이터사이언스학과
+            - url: https://bmsw.catholic.ac.kr/bmsw/community/notice.do
+              name: 바이오메디컬소프트웨어학과
+            - url: https://mbs.catholic.ac.kr/mbs/community/notice.do
+              name: 의생명과학과
+            - url: https://korean.catholic.ac.kr/korean/community/notice.do
+              name: 국어국문학과
+            - url: https://philosophy.catholic.ac.kr/philosophy/community/notice.do
+              name: 철학과
+            - url: https://koreanhistory.catholic.ac.kr/koreanhistory/community/notice.do
+              name: 국사학과
+            - url: https://english.catholic.ac.kr/english/community/notice.do
+              name: 영어영문학부
+            - url: https://cn.catholic.ac.kr/cn/community/notice.do
+              name: 중국언어문화학과
+            - url: https://japanese.catholic.ac.kr/japanese/major/notice.do
+              name: 일어일본문화학과
+            - url: https://french.catholic.ac.kr/french/community/notice.do
+              name: 프랑스어문화학과
+            - url: https://socialwelfare.catholic.ac.kr/socialwelfare/community/notice.do
+              name: 사회복지학과
+            - url: https://psychology.catholic.ac.kr/psychology/community/notice.do
+              name: 심리학과
+            - url: https://sociology.catholic.ac.kr/sociology/community/notice.do
+              name: 사회학과
+            - url: https://children.catholic.ac.kr/children/community/notice.do
+              name: 아동학과
+            - url: https://sped.catholic.ac.kr/sped/community/notice.do
+              name: 특수교육과
+            - url: https://business.catholic.ac.kr/business/community/notice.do
+              name: 경영학과
+            - url: https://accounting.catholic.ac.kr/accounting/community/notice.do
+              name: 회계학과
+            - url: https://is.catholic.ac.kr/is/community/notice.do
+              name: 국제학부
+            - url: https://law.catholic.ac.kr/law/community/notice.do
+              name: 법학과
+            - url: https://economics.catholic.ac.kr/economics/community/notice.do
+              name: 경제학과
+            - url: https://pa.catholic.ac.kr/pa/community/notice.do
+              name: 행정학과
+            - url: https://globalbiz.catholic.ac.kr/globalbiz/community/notice.do
+              name: 글로벌경영학과
+            - url: https://klc.catholic.ac.kr/klc/community/notice.do
+              name: 한국어문화학과
+            - url: https://music.catholic.ac.kr/music/community/notice.do
+              name: 음악과
+            - url: https://voice.catholic.ac.kr/voice/community/notice.do
+              name: 성악과
+            - url: https://liberal.catholic.ac.kr/liberal/community/notice.do
+              name: 자유전공학부
+            - url: https://catholic-college.catholic.ac.kr/catholic_college/notification/notice.do
+              name: 학부대학
+            - url: https://major-convergence.catholic.ac.kr/major_convergence/notice/notice.do
+              name: 융합전공학부
+            - url: https://teaching.catholic.ac.kr/teaching/community/notice.do
+              name: 교직과
+            - url: https://gbs.catholic.ac.kr/gbs/community/notice.do
+              name: 글로벌경영대학
+            - url: https://pharmacy.catholic.ac.kr/pharmacy/community/notice.do
+              name: 약학과
+        - name: 성신교정
+          url: https://songsin.catholic.ac.kr/ko/index.do
+          default-crawler: catholicUnivDefaultCrawler
+          urls:
+            - url: https://songsin.catholic.ac.kr/ko/songsin-community/notice.do?mode=list&&articleLimit=10&article.offset=0
+              name: 신학과
+        - name: 성의교정 - 의과대학
+          url: https://medicine.catholic.ac.kr/index.jsp
+          default-crawler: catholicUnivMedicineCrawler
+          urls:
+            - url: https://medicine.catholic.ac.kr/bbs/notice/noticelist.jsp
+              name: 의학과
+        - name: 성의교정 - 간호대학
+          url: https://nursing.catholic.ac.kr/index.jsp
+          default-crawler: catholicUnivNursingCrawler
+          urls:
+            - url: https://nursing.catholic.ac.kr/bbs/notice/noticelist.jsp
+              name: 간호학과

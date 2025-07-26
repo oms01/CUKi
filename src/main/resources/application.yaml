@@ -3,6 +3,7 @@ spring:
     name: univAlarm
   config:
     import:
+      - classpath:/universityConfig/CatholicUnivConfig.yaml
       - classpath:config/h2.yaml
 #      - classpath:config/mysql.yaml
       - classpath:config/env.yaml

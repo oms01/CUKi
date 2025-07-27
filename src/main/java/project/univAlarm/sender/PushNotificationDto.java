@@ -1,0 +1,25 @@
+package project.univAlarm.sender;
+
+import project.univAlarm.domain.Notification;
+
+public class PushNotificationDto {
+    private String schoolName;
+    private String kind;
+    private String title;
+    private String date;
+    private String writer;
+    private String link;
+
+    public PushNotificationDto(Notification notification) {
+        this.schoolName = notification.getNotificationType().getSchool().getName();
+        this.kind = notification.getNotificationType().getName();
+        this.title = notification.getTitle();
+        this.date = notification.getDate();
+        this.writer = notification.getWriter();
+        this.link = notification.getLink();
+    }
+
+    public String toString() {
+        return "["+schoolName+"/"+kind+date+"/"+writer+"]\n["+title +"]("+link+")";
+    }
+}

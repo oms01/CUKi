@@ -14,6 +14,7 @@ import project.univAlarm.utils.DateFormatter;
 public class DataInitializationRunner implements ApplicationRunner {
     private final UniversityDataInitializer universityDataInitializer;
     private final NotificationDataInitializer notificationDataInitializer;
+    private final FirebaseInitializer firebaseInitializer;
 
     @Override
     public void run(ApplicationArguments args) throws IOException {
@@ -21,5 +22,7 @@ public class DataInitializationRunner implements ApplicationRunner {
         log.info("[{}] University Data Initializing Complete", DateFormatter.currentTimeFormatted());
         notificationDataInitializer.initializeNotificationData();
         log.info("[{}] Notification Data Initializing Complete", DateFormatter.currentTimeFormatted());
+        firebaseInitializer.initialize();
+        log.info("[{}] Firebase Initializing Complete", DateFormatter.currentTimeFormatted());
     }
 }

@@ -1,7 +1,12 @@
 package project.univAlarm.sender;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import project.univAlarm.domain.Notification;
 
+@Getter @Setter
+@NoArgsConstructor
 public class PushNotificationDto {
     private String schoolName;
     private String kind;
@@ -20,6 +25,6 @@ public class PushNotificationDto {
     }
 
     public String toString() {
-        return "["+schoolName+"/"+kind+date+"/"+writer+"]\n["+title +"]("+link+")";
+        return "["+schoolName+"/"+kind+"/"+date+"/"+writer+"]\n["+title +"]";
     }
 }

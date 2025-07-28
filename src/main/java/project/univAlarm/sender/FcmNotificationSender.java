@@ -14,9 +14,10 @@ public class FcmNotificationSender {
                 .setNotification(
                         Notification.builder()
                                 .setTitle("🔥 새 공지사항이 올라왔어요!")
-                                .setBody(pushNotificationDto.toString())
+                                .setBody(pushNotificationDto.getTitle())
                                 .build()
                 )
+                .putData("link", pushNotificationDto.getLink())
                 .setToken(target)
                 .build();
         try{

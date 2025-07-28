@@ -16,7 +16,7 @@ public class PushNotificationDto {
     private String link;
 
     public PushNotificationDto(Notification notification) {
-        this.schoolName = notification.getNotificationType().getSchool().getName();
+        this.schoolName = notification.getNotificationType().getSchool().getName() +"/"+ notification.getNotificationType().getSchool().getCampus();
         this.kind = notification.getNotificationType().getName();
         this.title = notification.getTitle();
         this.date = notification.getDate();

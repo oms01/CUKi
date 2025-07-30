@@ -45,6 +45,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserDevice> userDevices = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserSubscription> userSubscriptions = new ArrayList<>();
+
     public User(String kakaoId, String name, String email) {
         this.kakaoId = kakaoId;
         this.name = name;

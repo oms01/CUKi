@@ -9,9 +9,12 @@ import project.univAlarm.detector.NotificationDetector;
 import project.univAlarm.domain.Notification;
 import project.univAlarm.domain.NotificationType;
 import project.univAlarm.domain.School;
+import project.univAlarm.domain.User;
+import project.univAlarm.domain.UserSubscription;
 import project.univAlarm.repository.NotificationRepository;
 import project.univAlarm.repository.NotificationTypeRepository;
 import project.univAlarm.repository.SchoolRepository;
+import project.univAlarm.repository.UserSubscriptionRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +22,13 @@ public class NotificationService {
     private final SchoolRepository schoolRepository;
     private final NotificationTypeRepository notificationTypeRepository;
     private final NotificationRepository notificationRepository;
+    private final UserSubscriptionRepository userSubscriptionRepository;
+
+    public List<Notification> getSubscribedNotification(User user) {
+        List<UserSubscription> subscriptionList = userSubscriptionRepository.findByUserId(user.getId());
+        List<NotificationType> notificationTypeList = subscriptionList.stream().map(UserSubscription::getNotificationType).toList();
+        return notificationRepository.findByNotificationTypeIn(notificationTypeList);
+    }
 
     public void saveNotifications(NotificationDetector detector, List<CrawledNotificationDto> crawledNotificationDtos) {
         for (CrawledNotificationDto crawledNotificationDto : crawledNotificationDtos) {

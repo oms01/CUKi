@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user_subscriptions",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"device_id", "notification_type_id"}))
+        uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "notification_type_id"}))
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserSubscription {
@@ -20,8 +20,8 @@ public class UserSubscription {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "device_id", nullable = false)
-    private UserDevice device;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "notification_type_id", nullable = false)
@@ -31,8 +31,8 @@ public class UserSubscription {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    public UserSubscription(UserDevice device, NotificationType notificationType) {
-        this.device = device;
+    public UserSubscription(User user, NotificationType notificationType) {
+        this.user = user;
         this.notificationType = notificationType;
     }
 }

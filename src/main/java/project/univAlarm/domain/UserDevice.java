@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import project.univAlarm.service.dto.DeviceRequestDto;
 
 @Entity
 @Table(name = "user_devices")
@@ -54,12 +55,20 @@ public class UserDevice {
         this.platform = platform;
     }
 
+    public UserDevice(DeviceRequestDto deviceRequestDto) {
+        this.user = deviceRequestDto.getUser();
+        this.name = deviceRequestDto.getName();
+        this.token = deviceRequestDto.getToken();
+        this.platform = deviceRequestDto.getPlatform();
+    }
+
     public void updateToken(String token) {
         this.token = token;
     }
 
-    public void updateDeviceInfo(String name, String platform) {
-        this.name = name;
-        this.platform = platform;
+    public void updateDeviceInfo(DeviceRequestDto deviceRequestDto) {
+        this.name = deviceRequestDto.getName();
+        this.token = deviceRequestDto.getToken();
+        this.platform = deviceRequestDto.getPlatform();
     }
 }

@@ -7,7 +7,7 @@ import project.univAlarm.domain.Notification;
 import project.univAlarm.domain.NotificationType;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
-    List<Notification> findByNotificationTypeIdIn(List<Long> notificationTypeIds);
+    List<Notification> findByNotificationTypeIn(List<NotificationType> notificationTypes);
     List<Notification> findByNotificationTypeId(Long notificationTypeId);
     Optional<Notification> findByNotificationTypeAndOriginId(NotificationType nOtificationType, Long originId);
 }

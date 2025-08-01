@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import project.univAlarm.crawler.CrawledNotificationDto;
 import project.univAlarm.detector.NotificationDetector;
 import project.univAlarm.domain.Notification;
@@ -25,6 +26,7 @@ public class NotificationService {
     private final NotificationRepository notificationRepository;
     private final UserSubscriptionRepository userSubscriptionRepository;
 
+    @Transactional(readOnly = true)
     public List<NotificationResponseDto> findSubscribedNotificationByUser(User user) {
         List<UserSubscription> subscriptionList = userSubscriptionRepository.findByUserId(user.getId());
         List<NotificationType> notificationTypeList = subscriptionList.stream().map(UserSubscription::getNotificationType).toList();
@@ -34,6 +36,7 @@ public class NotificationService {
                 .toList();
     }
 
+    @Transactional
     public void saveNotifications(NotificationDetector detector, List<CrawledNotificationDto> crawledNotificationDtos) {
         for (CrawledNotificationDto crawledNotificationDto : crawledNotificationDtos) {
             saveNotification(detector, crawledNotificationDto);

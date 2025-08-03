@@ -15,7 +15,7 @@ public class NotificationTypeService {
 
     @Transactional(readOnly = true)
     public List<NotificationTypeResponseDto> findBySchool(Long school) {
-        List<NotificationType> notificationTypes = notificationTypeRepository.findBySchool(school);
+        List<NotificationType> notificationTypes = notificationTypeRepository.findBySchoolId(school);
         return notificationTypes.stream()
                 .map(NotificationTypeResponseDto::new)
                 .toList();

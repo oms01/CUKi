@@ -39,7 +39,8 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .addFilterBefore(new JWTFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests((auth) -> auth // 특정 경로에 대한 권한 설정
-                        .requestMatchers("/api/v1/auth/kakao/**","/h2-console/**","/login", "/", "/join").permitAll()
+                        .requestMatchers("/h2-console/**","/api/v1/notification/**").permitAll()
+                        .requestMatchers("/api/v1/auth/kakao/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));

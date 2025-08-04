@@ -39,7 +39,8 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .addFilterBefore(new JWTFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests((auth) -> auth // 특정 경로에 대한 권한 설정
-                        .requestMatchers("/api/v1/auth/kakao/**","/h2-console/**","/login", "/", "/join").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/api/v1/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
@@ -48,16 +49,13 @@ public class SecurityConfig {
                 .cors((corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
                     @Override
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-
                         CorsConfiguration configuration = new CorsConfiguration();
                         configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
                         configuration.setAllowedMethods(Collections.singletonList("*"));
                         configuration.setAllowCredentials(true);
                         configuration.setAllowedHeaders(Collections.singletonList("*"));
                         configuration.setMaxAge(3600L);
-
                         configuration.setExposedHeaders(Collections.singletonList("Authorization"));
-
                         return configuration;
                     }
                 })));

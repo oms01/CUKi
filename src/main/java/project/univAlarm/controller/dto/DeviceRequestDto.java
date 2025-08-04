@@ -1,20 +1,19 @@
-package project.univAlarm.service.dto;
+package project.univAlarm.controller.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import project.univAlarm.domain.User;
 
 @Getter @Setter
 public class DeviceRequestDto {
-    private User user;
+    private Long userId;
     private String name;
     private String token;
     private String platform;
 
     @Builder
-    public DeviceRequestDto(User user, String name, String token, String platform) {
-        this.user = user;
+    public DeviceRequestDto(Long userId, String name, String token, String platform) {
+        this.userId = userId;
         this.name = name;
         this.token = token;
         this.platform = platform;

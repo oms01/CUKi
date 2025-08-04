@@ -1,10 +1,12 @@
 package project.univAlarm.service.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import project.univAlarm.kakao.KakaoUserInfoResponseDto;
 
 @Getter @Setter
+@NoArgsConstructor
 public class UserJoinDto {
     private Long kakaoId;
     private String email;

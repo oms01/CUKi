@@ -44,7 +44,7 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    private String role;
+    private String role = "USER";
 
     @CreationTimestamp
     @Column(name = "created_at")

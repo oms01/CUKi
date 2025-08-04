@@ -21,23 +21,20 @@ public class JWTFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-
         String authorization = request.getHeader("Authorization");
 
-        if (validateHeader(authorization)) {
+        if (isHeaderInvalid(authorization)) {
             filterChain.doFilter(request, response);
             return;
         }
-        //Bearer 부분 제거 후 순수 토큰만 획득
+
         String token = authorization.split(" ")[1];
-
-        if (validateToken(token)) {
+        if (isTokenExpired(token)) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        //토큰에서 username과 role 획득
-        Long userId = Long.valueOf(jwtUtil.getUserId(token));
+        Long userId = jwtUtil.getUserId(token);
         String role = jwtUtil.getRole(token);
 
         //userEntity를 생성하여 값 set
@@ -53,11 +50,11 @@ public class JWTFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private boolean validateHeader(String authorization) {
+    private boolean isHeaderInvalid(String authorization) {
         return authorization == null || !authorization.startsWith("Bearer ");
     }
 
-    private boolean validateToken(String token) {
+    private boolean isTokenExpired(String token) {
         return jwtUtil.isExpired(token);
     }
 }

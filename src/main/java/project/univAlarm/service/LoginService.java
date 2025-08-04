@@ -32,7 +32,7 @@ public class LoginService {
     }
 
     public String createToken(User userEntity) {
-        return jwtUtil.createJwt(userEntity.getId(), userEntity.getRole(), 60*60*10L);
+        return jwtUtil.createJwt(userEntity.getId(), userEntity.getRole(), 60*60*1000L);
     }
 
 }

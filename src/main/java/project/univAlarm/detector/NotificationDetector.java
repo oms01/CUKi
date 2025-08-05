@@ -17,6 +17,8 @@ public class NotificationDetector {
 
     private String baseurl;
     private Crawler crawler;
+    private Long NotificationTypeId;
+    private String campusName;
     private String universityName;
     private String departmentName;
     private boolean department;

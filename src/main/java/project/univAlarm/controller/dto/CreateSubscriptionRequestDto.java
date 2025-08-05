@@ -1,10 +1,11 @@
 package project.univAlarm.controller.dto;
 
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class CreateSubscriptionRequestDto {
-    private Long notificationTypeId;
+    private List<Long> notificationTypeIds;
 }

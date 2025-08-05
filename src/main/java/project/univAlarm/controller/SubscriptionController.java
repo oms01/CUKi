@@ -37,9 +37,10 @@ public class SubscriptionController {
             @RequestBody CreateSubscriptionRequestDto requestDto
     ){
         Long userId = Long.valueOf(userDetails.getUsername());
-        Long notificationTypeId = requestDto.getNotificationTypeId();
-
-        subscriptionService.save(userId, notificationTypeId);
+        List<Long> notificationTypeIds = requestDto.getNotificationTypeIds();
+        for (Long notificationTypeId : notificationTypeIds) {
+            subscriptionService.save(userId, notificationTypeId);
+        }
         return ApiResponse.noContent();
     }
 

@@ -32,7 +32,7 @@ public class DetectorConfig {
                     continue;
                 }
                 for (UrlEntry entity : campus.getUrls()) {
-                    NotificationDetector detector = createNotificationDetector(config, entity, crawler);
+                    NotificationDetector detector = createNotificationDetector(config, entity, crawler, campus);
                     detectors.add(detector);
                 }
             }
@@ -40,10 +40,11 @@ public class DetectorConfig {
         return detectors;
     }
 
-    private NotificationDetector createNotificationDetector(UnivConfig config, UrlEntry entity, Crawler crawler) {
+    private NotificationDetector createNotificationDetector(UnivConfig config, UrlEntry entity, Crawler crawler, Campus campus) {
         NotificationDetector detector = new NotificationDetector();
         detector.setDepartment(entity.isDepartment());
         detector.setUniversityName(config.getUnivName());
+        detector.setCampusName(campus.getName());
         detector.setDepartmentName(entity.getName());
         detector.setBaseurl(entity.getUrl());
         detector.setCrawler(crawler);

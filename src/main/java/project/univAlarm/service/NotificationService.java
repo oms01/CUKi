@@ -13,7 +13,6 @@ import project.univAlarm.crawler.CrawledNotificationDto;
 import project.univAlarm.detector.NotificationDetector;
 import project.univAlarm.domain.Notification;
 import project.univAlarm.domain.NotificationType;
-import project.univAlarm.domain.School;
 import project.univAlarm.domain.UserSubscription;
 import project.univAlarm.repository.NotificationRepository;
 import project.univAlarm.repository.NotificationTypeRepository;
@@ -44,15 +43,13 @@ public class NotificationService {
     @Transactional
     public void saveNotifications(NotificationDetector detector, List<CrawledNotificationDto> crawledNotificationDtos) {
         for (CrawledNotificationDto crawledNotificationDto : crawledNotificationDtos) {
-            saveNotification(detector, crawledNotificationDto);
+            saveNotification(detector.getNotificationTypeId(), crawledNotificationDto);
         }
     }
 
-    public void saveNotification(NotificationDetector detector, CrawledNotificationDto crawledNotificationDto) {
-        Optional<School> school = schoolRepository.findByName(detector.getUniversityName());
-        Optional<NotificationType> notificationType = notificationTypeRepository.findBySchoolIdAndName(
-                school.orElseThrow().getId(), detector.getDepartmentName());
-        Optional<Notification> notification = notificationRepository.findByNotificationTypeAndOriginId(notificationType.orElseThrow(), crawledNotificationDto.getId());
+    public void saveNotification(Long notificationTypeId, CrawledNotificationDto crawledNotificationDto) {
+        Optional<NotificationType> notificationType = notificationTypeRepository.findById(notificationTypeId);
+        Optional<Notification> notification = notificationRepository.findByNotificationTypeIdAndOriginId(notificationTypeId, crawledNotificationDto.getId());
         notification.orElseGet(() -> notificationRepository.save(new Notification(notificationType.orElseThrow(), crawledNotificationDto)));
     }
 }

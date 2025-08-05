@@ -41,6 +41,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth // 특정 경로에 대한 권한 설정
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/api/v1/**").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));

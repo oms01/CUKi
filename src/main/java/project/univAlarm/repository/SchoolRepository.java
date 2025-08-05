@@ -7,5 +7,6 @@ import project.univAlarm.domain.School;
 
 public interface SchoolRepository extends JpaRepository<School, Long> {
     List<School> findAllByOrderByNameAsc();
-    Optional<School> findByName(String name);
+    Optional<School> findByNameAndCampus(String name, String campus);
+
 }

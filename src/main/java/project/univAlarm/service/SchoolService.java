@@ -1,6 +1,7 @@
 package project.univAlarm.service;
 
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,5 +20,10 @@ public class SchoolService {
         return schools.stream()
                 .map(SchoolResponseDto::new)
                 .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<School> findBySchoolNameAndCampus(String schoolName, String campus) {
+        return schoolRepository.findByNameAndCampus(schoolName, campus);
     }
 }

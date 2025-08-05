@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import project.univAlarm.docs.SchoolControllerDocs;
 import project.univAlarm.service.NotificationTypeService;
 import project.univAlarm.service.SchoolService;
 import project.univAlarm.service.dto.NotificationTypeResponseDto;
@@ -15,7 +16,7 @@ import project.univAlarm.service.dto.SchoolResponseDto;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/schools")
-public class SchoolController {
+public class SchoolController implements SchoolControllerDocs {
     private final SchoolService schoolService;
     private final NotificationTypeService notificationTypeService;
 

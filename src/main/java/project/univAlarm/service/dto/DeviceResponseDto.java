@@ -8,14 +8,14 @@ import project.univAlarm.domain.UserDevice;
 @Setter
 public class DeviceResponseDto {
     private Long id;
-    private Long user;
+    private Long userId;
     private String name;
     private String token;
     private String platform;
 
     public DeviceResponseDto(UserDevice device) {
         this.id = device.getId();
-        this.user = device.getUser().getId();
+        this.userId = device.getUser().getId();
         this.name = device.getName();
         this.token = device.getToken();
         this.platform = device.getPlatform();

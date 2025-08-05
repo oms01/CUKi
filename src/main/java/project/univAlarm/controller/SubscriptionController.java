@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import project.univAlarm.controller.dto.CreateSubscriptionRequestDto;
 import project.univAlarm.controller.dto.DeleteSubscriptionRequestDto;
+import project.univAlarm.docs.SubscriptionControllerDocs;
 import project.univAlarm.jwt.dto.CustomUserDetails;
 import project.univAlarm.service.SubscriptionService;
 import project.univAlarm.service.dto.UserSubscriptionResponseDto;
@@ -19,7 +20,7 @@ import project.univAlarm.service.dto.UserSubscriptionResponseDto;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/subscriptions")
-public class SubscriptionController {
+public class SubscriptionController implements SubscriptionControllerDocs {
     private final SubscriptionService subscriptionService;
 
     @GetMapping

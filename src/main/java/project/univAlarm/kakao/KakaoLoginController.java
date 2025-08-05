@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import project.univAlarm.docs.KakaoLoginControllerDocs;
 import project.univAlarm.domain.User;
 import project.univAlarm.service.LoginService;
 import project.univAlarm.service.dto.UserJoinDto;
@@ -13,7 +14,7 @@ import project.univAlarm.service.dto.UserJoinDto;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth/kakao")
-public class KakaoLoginController {
+public class KakaoLoginController implements KakaoLoginControllerDocs {
 
     private final KakaoLoginService kakaoLoginService;
     private final LoginService loginService;

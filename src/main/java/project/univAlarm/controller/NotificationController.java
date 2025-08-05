@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import project.univAlarm.docs.NotificationControllerDocs;
 import project.univAlarm.jwt.dto.CustomUserDetails;
 import project.univAlarm.service.NotificationService;
 import project.univAlarm.service.dto.NotificationResponseDto;
@@ -15,7 +16,7 @@ import project.univAlarm.service.dto.NotificationResponseDto;
 @RestController
 @RequestMapping("/api/v1/notification")
 @RequiredArgsConstructor
-public class NotificationController {
+public class NotificationController implements NotificationControllerDocs {
 
     private final NotificationService notificationService;
 

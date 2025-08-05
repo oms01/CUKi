@@ -15,13 +15,20 @@ public class DataInitializationRunner implements ApplicationRunner {
     private final UniversityDataInitializer universityDataInitializer;
     private final NotificationDataInitializer notificationDataInitializer;
     private final FirebaseInitializer firebaseInitializer;
+    private final DetectorPropertiesInitializer detectorPropertiesInitializer;
 
     @Override
     public void run(ApplicationArguments args) throws IOException {
+
         universityDataInitializer.initializeUniversityData();
         log.info("[{}] University Data Initializing Complete", DateFormatter.currentTimeFormatted());
+
+        detectorPropertiesInitializer.initializeDetectorProperties();
+        log.info("[{}] Detector Properties Initializing Complete", DateFormatter.currentTimeFormatted());
+
         notificationDataInitializer.initializeNotificationData();
         log.info("[{}] Notification Data Initializing Complete", DateFormatter.currentTimeFormatted());
+
         firebaseInitializer.initialize();
         log.info("[{}] Firebase Initializing Complete", DateFormatter.currentTimeFormatted());
     }

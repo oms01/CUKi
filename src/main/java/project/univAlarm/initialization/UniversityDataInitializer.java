@@ -20,6 +20,9 @@ public class UniversityDataInitializer {
     private final SchoolRepository schoolRepository;
     private final NotificationTypeRepository notificationTypeRepository;
 
+    /**
+     * school, notification Type 저장
+     */
     @Transactional
     public void initializeUniversityData() {
         for(UnivConfig config : univConfig.getUnivList()) {
@@ -33,7 +36,7 @@ public class UniversityDataInitializer {
     }
 
     private School saveOrUpdateSchool(String UnivName, String CampusName) {
-        Optional<School> School = schoolRepository.findByName(UnivName);
+        Optional<School> School = schoolRepository.findByNameAndCampus(UnivName,CampusName);
         return School.orElseGet(() -> schoolRepository.save(new School(UnivName, CampusName)));
     }
 

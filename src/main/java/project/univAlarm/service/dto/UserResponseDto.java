@@ -18,7 +18,7 @@ public class UserResponseDto {
         this.email = user.getEmail();
         this.username = user.getName();
         this.role = user.getRole();
-        LocalDateTime createdAt = user.getCreatedAt();
+        this.createdAt = user.getCreatedAt();
     }
 
 }

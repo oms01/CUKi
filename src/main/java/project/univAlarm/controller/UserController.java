@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import project.univAlarm.docs.UserControllerDocs;
 import project.univAlarm.jwt.dto.CustomUserDetails;
 import project.univAlarm.service.UserService;
 import project.univAlarm.service.dto.UserResponseDto;
@@ -14,7 +15,7 @@ import project.univAlarm.service.dto.UserResponseDto;
 @RestController
 @RequestMapping("/api/v1/user/profile")
 @RequiredArgsConstructor
-public class UserController {
+public class UserController implements UserControllerDocs {
     private final UserService userService;
 
     @GetMapping

@@ -19,10 +19,10 @@ import project.univAlarm.controller.dto.DeviceRequestDto;
 import project.univAlarm.controller.dto.UpdateDeviceRequestDto;
 
 @Entity
-@Table(name = "user_devices")
+@Table(name = "devices")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserDevice {
+public class Device {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,14 +49,14 @@ public class UserDevice {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public UserDevice(User user, String name, String token, String platform) {
+    public Device(User user, String name, String token, String platform) {
         this.user = user;
         this.name = name;
         this.token = token;
         this.platform = platform;
     }
 
-    public UserDevice(User user, DeviceRequestDto deviceRequestDto) {
+    public Device(User user, DeviceRequestDto deviceRequestDto) {
         this.user = user;
         this.name = deviceRequestDto.getName();
         this.token = deviceRequestDto.getToken();

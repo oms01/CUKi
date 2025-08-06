@@ -1,6 +1,5 @@
 package project.univAlarm.service;
 
-import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -11,16 +10,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.univAlarm.controller.dto.DeviceRequestDto;
 import project.univAlarm.controller.dto.UpdateDeviceRequestDto;
+import project.univAlarm.domain.Device;
 import project.univAlarm.domain.User;
-import project.univAlarm.domain.UserDevice;
-import project.univAlarm.repository.UserDeviceRepository;
+import project.univAlarm.repository.DeviceRepository;
 import project.univAlarm.repository.UserRepository;
 import project.univAlarm.service.dto.DeviceResponseDto;
 
 @Service
 @RequiredArgsConstructor
 public class DeviceService {
-    private final UserDeviceRepository userDeviceRepository;
+    private final DeviceRepository deviceRepository;
     private final UserRepository userRepository;
 
     @Transactional
@@ -29,37 +28,45 @@ public class DeviceService {
         if(user.isEmpty()){
             return null;
         }
-        UserDevice device = userDeviceRepository.save(new UserDevice(user.get(), userDevice));
+        Device device = deviceRepository.save(new Device(user.get(), userDevice));
         return new DeviceResponseDto(device);
     }
 
     @Transactional
     public DeviceResponseDto update(Long userId, UpdateDeviceRequestDto userDevice){
-        UserDevice device = findDeviceOrThrow(userId, userDevice.getId());
+        Device device = findDeviceOrThrow(userId, userDevice.getId());
+        if(device==null){
+            return null;
+        }
         device.updateDeviceInfo(userDevice);
         return new DeviceResponseDto(device);
     }
 
     @Transactional
     public void delete(Long userId, Long deviceId){
-        UserDevice device = findDeviceOrThrow(userId, deviceId);
-        userDeviceRepository.delete(device);
+        deviceRepository.findById(deviceId).ifPresent(device -> {
+            if (!userId.equals(device.getUser().getId())) {
+                throw new AccessDeniedException("Access denied");
+            }
+            deviceRepository.delete(device);
+        });
     }
 
     @Transactional(readOnly = true)
     public List<DeviceResponseDto> findAllDevicesByUser(Long userId){
-        List<UserDevice> devices = userDeviceRepository.findByUserId(userId);
+        List<Device> devices = deviceRepository.findByUserId(userId);
         return devices.stream().map(DeviceResponseDto::new).collect(Collectors.toList());
     }
 
-    private UserDevice findDeviceOrThrow(Long userId, Long deviceId) {
-        UserDevice device = userDeviceRepository.findById(deviceId)
-                .orElseThrow(() -> new EntityNotFoundException("Device with id: " + deviceId + " not found"));
-
-        if (!Objects.equals(userId, device.getUser().getId())) {
+    private Device findDeviceOrThrow(Long userId, Long deviceId) {
+        Optional<Device> device = deviceRepository.findById(deviceId);
+        if(device.isEmpty()){
+            return null;
+        }
+        if (!Objects.equals(userId, device.get().getUser().getId())) {
             throw new AccessDeniedException("Access denied");
         }
 
-        return device;
+        return device.get();
     }
 }

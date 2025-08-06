@@ -25,4 +25,19 @@ public class PushNotificationReport {
                 notification.getSchoolName(), shortenTitle, notification.getLink(), totalCount, successCount, failureCount
         );
     }
+
+    public void addCount(int totalCount,  int successCount, int failureCount) {
+        this.totalCount += totalCount;
+        this.successCount += successCount;
+        this.failureCount += failureCount;
+    }
+
+    public void addSuccess() {
+        successCount++;
+    }
+
+    public void addFailure() {
+        failureCount++;
+    }
+
 }

@@ -23,7 +23,7 @@ public class NotificationDataInitializer {
     public void initializeNotificationData() throws IOException {
         for (NotificationDetector detector : detectors) {
             List<CrawledNotificationDto> crawledNotificationDtos = detector.initializeDetector();
-            notificationService.saveNotifications(detector, crawledNotificationDtos);
+            notificationService.saveNotifications(detector.getNotificationType(), crawledNotificationDtos);
         }
     }
 }

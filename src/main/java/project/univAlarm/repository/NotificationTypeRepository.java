@@ -6,9 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import project.univAlarm.domain.NotificationType;
 
 public interface NotificationTypeRepository extends JpaRepository<NotificationType, Long> {
-    List<NotificationType> findBySchoolIdOrderByIsDepartmentAscNameAsc(Long id);
+    List<NotificationType> findBySchoolIdOrderByIsDepartmentAscNameAsc(Long schoolId);
     Optional<NotificationType> findBySchoolIdAndName(Long schoolId, String name);
-    List<NotificationType> findBySchoolId(Long schoolId);
-    List<NotificationType> findByIdIn(List<Long> notificationTypeIds);
-
 }

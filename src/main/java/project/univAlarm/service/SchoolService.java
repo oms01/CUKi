@@ -16,7 +16,7 @@ public class SchoolService {
 
     @Transactional(readOnly = true)
     public List<SchoolResponseDto> findAll() {
-        List<School> schools = schoolRepository.findAll();
+        List<School> schools = schoolRepository.findAllByOrderByNameAsc();
         return schools.stream()
                 .map(SchoolResponseDto::new)
                 .toList();

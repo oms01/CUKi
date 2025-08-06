@@ -25,7 +25,7 @@ public class DetectorManager {
         long start = System.currentTimeMillis();
         for (NotificationDetector detector : detectors) {
             List<CrawledNotificationDto> crawledNotificationDtos = detector.runDetector();
-            notificationService.saveNotifications(detector, crawledNotificationDtos);
+            notificationService.saveNotifications(detector.getNotificationType(), crawledNotificationDtos);
         }
         long end = System.currentTimeMillis();
         log.info("[{}] {} Change Detector finished in {} ms", DateFormatter.currentTimeFormatted(), detectors.size(), end - start);

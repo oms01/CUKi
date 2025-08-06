@@ -25,7 +25,7 @@ public class LoginService {
         }
 
         User data = new User(joinDTO);
-        data.setRole("ROLE_ADMIN");
+        data.setRole("ROLE_USER");
 
         userRepository.save(data);
         return data;

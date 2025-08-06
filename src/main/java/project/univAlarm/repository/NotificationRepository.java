@@ -9,7 +9,8 @@ import project.univAlarm.domain.NotificationType;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
     List<Notification> findByNotificationTypeIn(List<NotificationType> notificationTypes, Pageable pageable);
-    Optional<Notification> findByNotificationTypeIdAndOriginId(Long NotificationTypeId, Long id);
+
+    boolean existsByNotificationTypeIdAndOriginId(Long notificationTypeId, Long originId);
+
     Optional<Notification> findByNotificationTypeId(Long notificationTypeId);
-    Optional<Notification> findByNotificationTypeAndOriginId(NotificationType nOtificationType, Long originId);
 }

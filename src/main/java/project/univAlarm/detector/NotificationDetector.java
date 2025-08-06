@@ -9,6 +9,8 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import project.univAlarm.crawler.CrawledNotificationDto;
 import project.univAlarm.crawler.catholicUniv.Crawler;
+import project.univAlarm.domain.NotificationType;
+import project.univAlarm.domain.School;
 
 @Slf4j
 @Getter @Setter
@@ -17,9 +19,11 @@ public class NotificationDetector {
 
     private String baseurl;
     private Crawler crawler;
-    private Long NotificationTypeId;
-    private String campusName;
+    private NotificationType notificationType;
+    private School school;
+
     private String universityName;
+    private String campusName;
     private String departmentName;
     private boolean department;
     private List<CrawledNotificationDto> notificationList = new ArrayList<>();

@@ -18,12 +18,17 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import project.univAlarm.jwt.JWTFilter;
 import project.univAlarm.jwt.JWTUtil;
+import project.univAlarm.security.CustomAccessDeniedHandler;
+import project.univAlarm.security.CustomAuthenticationEntryPoint;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+
     private final JWTUtil jwtUtil;
+    private final CustomAccessDeniedHandler accessDeniedHandler;
+    private final CustomAuthenticationEntryPoint authenticationEntryPoint;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
@@ -61,6 +66,11 @@ public class SecurityConfig {
                     }
                 })));
 
+        http
+                .exceptionHandling(ex -> ex
+                        .accessDeniedHandler(accessDeniedHandler) // 403
+                        .authenticationEntryPoint(authenticationEntryPoint) // 401
+                );
 
         return http.build();
     }

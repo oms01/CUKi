@@ -55,7 +55,7 @@ public class User {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserDevice> userDevices = new ArrayList<>();
+    private List<Device> devices = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserSubscription> userSubscriptions = new ArrayList<>();

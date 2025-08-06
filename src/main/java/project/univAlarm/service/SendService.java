@@ -5,8 +5,8 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import project.univAlarm.domain.Notification;
-import project.univAlarm.domain.UserDevice;
-import project.univAlarm.repository.UserDeviceRepository;
+import project.univAlarm.domain.Device;
+import project.univAlarm.repository.DeviceRepository;
 import project.univAlarm.sender.NotificationSender;
 import project.univAlarm.sender.PushNotificationDto;
 import project.univAlarm.sender.PushNotificationReport;
@@ -15,20 +15,20 @@ import project.univAlarm.sender.PushNotificationReport;
 @RequiredArgsConstructor
 public class SendService {
     private final HashMap<String, NotificationSender> notificationSenders;
-    private final UserDeviceRepository userDeviceRepository;
+    private final DeviceRepository deviceRepository;
 
     public PushNotificationReport send(Notification notification) {
         PushNotificationReport report = new PushNotificationReport();
 
         PushNotificationDto pushNotificationDto = new PushNotificationDto(notification);
 
-        List<UserDevice> targets = userDeviceRepository.findByNotificationTypeId(
+        List<Device> targets = deviceRepository.findByNotificationTypeId(
                 notification.getNotificationType().getId());
 
         report.setNotification(pushNotificationDto);
         report.setTotalCount(targets.size());
 
-        for (UserDevice target : targets) {
+        for (Device target : targets) {
             String platform = target.getPlatform();
             NotificationSender notificationSender = notificationSenders.get(platform);
             if (notificationSender != null) {

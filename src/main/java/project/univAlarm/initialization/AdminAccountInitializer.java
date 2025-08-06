@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.univAlarm.domain.User;
+import project.univAlarm.enums.Role;
 import project.univAlarm.service.LoginService;
 import project.univAlarm.service.dto.UserJoinDto;
 
@@ -20,7 +21,7 @@ public class AdminAccountInitializer {
     public void initializeAdminAccount() {
         UserJoinDto adminJoinDto = createAdminJoinDto();
 
-        User admin = loginService.joinProcess(adminJoinDto, "ROLE_ADMIN");
+        User admin = loginService.joinProcess(adminJoinDto, Role.ADMIN.getRoles());
 
         String token = loginService.createToken(admin, 60L*60*24*365*100);
 
@@ -29,7 +30,7 @@ public class AdminAccountInitializer {
 
     private UserJoinDto createAdminJoinDto() {
         UserJoinDto admin = new UserJoinDto();
-        admin.setRole("ROLE_ADMIN");
+        admin.setRole(Role.ADMIN.getRoles());
         admin.setUsername("admin");
         admin.setEmail("admin@admin.com");
         admin.setKakaoId(1L);

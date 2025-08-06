@@ -1,5 +1,6 @@
 package project.univAlarm.exception;
 
+import javax.naming.AuthenticationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,15 +12,21 @@ import project.univAlarm.controller.ApiResponse;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(NoHandlerFoundException.class)
-    public ResponseEntity<ApiResponse<Void>> handle404(NoHandlerFoundException e) {
-        return ApiResponse.notFound("resource not found");
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ApiResponse<Void>> handle401(AuthenticationException e) {
+        return ApiResponse.unauthorized("Authentication failed");
     }
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ApiResponse<Void>> handle403(AccessDeniedException e) {
         return ApiResponse.unauthorized("access denied.");
     }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> handle404(NoHandlerFoundException e) {
+        return ApiResponse.notFound("resource not found");
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handle500(Exception e) {

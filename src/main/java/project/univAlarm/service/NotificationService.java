@@ -1,5 +1,6 @@
 package project.univAlarm.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -35,16 +36,20 @@ public class NotificationService {
     }
 
     @Transactional
-    public void saveNotifications(NotificationType notificationType, List<CrawledNotificationDto> crawledNotificationDtos) {
+    public List<Notification> saveNotifications(NotificationType notificationType, List<CrawledNotificationDto> crawledNotificationDtos) {
+        List<Notification> savedNotifications =  new ArrayList<>();
         for (CrawledNotificationDto crawledNotificationDto : crawledNotificationDtos) {
-            saveNotification(notificationType, crawledNotificationDto);
+            Notification notification = saveNotification(notificationType, crawledNotificationDto);
+            if(notification != null) savedNotifications.add(notification);
         }
+        return savedNotifications;
     }
 
-    public void saveNotification(NotificationType notificationType, CrawledNotificationDto crawledNotificationDto) {
+    public Notification saveNotification(NotificationType notificationType, CrawledNotificationDto crawledNotificationDto) {
         boolean notiExists = notificationRepository.existsByNotificationTypeIdAndOriginId(notificationType.getId(), crawledNotificationDto.getId());
         if(!notiExists) {
-            notificationRepository.save(new Notification(notificationType, crawledNotificationDto));
+            return notificationRepository.save(new Notification(notificationType, crawledNotificationDto));
         }
+        return null;
     }
 }

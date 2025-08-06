@@ -51,4 +51,5 @@ public class DetectorConfig {
         return detector;
     }
 
+
 }

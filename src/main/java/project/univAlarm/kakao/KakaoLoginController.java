@@ -24,8 +24,8 @@ public class KakaoLoginController implements KakaoLoginControllerDocs {
         String accessToken = kakaoLoginService.getAccessTokenFromKakao(code);
         KakaoUserInfoResponseDto userInfo = kakaoLoginService.getUserInfo(accessToken); //카카오 유저 정보
 
-        User userEntity = loginService.joinProcess(new UserJoinDto(userInfo));
-        String token = loginService.createToken(userEntity);
+        User userEntity = loginService.joinProcess(new UserJoinDto(userInfo),"ROLE_USER");
+        String token = loginService.createToken(userEntity,60*60L);
         return ResponseEntity.ok()
                 .header("Authorization", "Bearer " + token)
                 .body(userEntity);

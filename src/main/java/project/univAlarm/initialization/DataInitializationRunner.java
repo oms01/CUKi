@@ -16,6 +16,7 @@ public class DataInitializationRunner implements ApplicationRunner {
     private final NotificationDataInitializer notificationDataInitializer;
     private final FirebaseInitializer firebaseInitializer;
     private final DetectorPropertiesInitializer detectorPropertiesInitializer;
+    private final AdminAccountInitializer adminAccountInitializer;
 
     @Override
     public void run(ApplicationArguments args) throws IOException {
@@ -31,5 +32,8 @@ public class DataInitializationRunner implements ApplicationRunner {
 
         firebaseInitializer.initialize();
         log.info("[{}] Firebase Initializing Complete", DateFormatter.currentTimeFormatted());
+
+        adminAccountInitializer.initializeAdminAccount();
+        log.info("[{}] Admin Account Initializing Complete", DateFormatter.currentTimeFormatted());
     }
 }

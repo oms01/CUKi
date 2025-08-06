@@ -42,6 +42,7 @@ public class CatholicUnivDefaultCrawler implements Crawler {
         String date = tds.get(len-3).text();
         String writer = tds.get(len-2).text();
 
+        if(baseUrl.contains("campuslife")) baseUrl = "https://www.catholic.ac.kr/ko/campuslife/notice.do";
 
         return new CrawledNotificationDto(id, title, date, writer, baseUrl+href);
     }

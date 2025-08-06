@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import project.univAlarm.domain.School;
 
 public interface SchoolRepository extends JpaRepository<School, Long> {
-    List<School> findAllByOrderByNameAsc();
     Optional<School> findByNameAndCampus(String name, String campus);
-
+    List<School> findAllByOrderByNameAsc();
 }

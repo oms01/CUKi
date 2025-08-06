@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import project.univAlarm.detector.DetectorManager;
 import project.univAlarm.utils.DateFormatter;
 
 @Component
@@ -16,6 +17,8 @@ public class DataInitializationRunner implements ApplicationRunner {
     private final NotificationDataInitializer notificationDataInitializer;
     private final FirebaseInitializer firebaseInitializer;
     private final DetectorPropertiesInitializer detectorPropertiesInitializer;
+    private final AdminAccountInitializer adminAccountInitializer;
+    private final DetectorManager detectorManager;
 
     @Override
     public void run(ApplicationArguments args) throws IOException {
@@ -31,5 +34,11 @@ public class DataInitializationRunner implements ApplicationRunner {
 
         firebaseInitializer.initialize();
         log.info("[{}] Firebase Initializing Complete", DateFormatter.currentTimeFormatted());
+
+        adminAccountInitializer.initializeAdminAccount();
+        log.info("[{}] Admin Account Initializing Complete", DateFormatter.currentTimeFormatted());
+
+        log.info("[{}] DetectorManager start running", DateFormatter.currentTimeFormatted());
+        detectorManager.startScheduledTask();
     }
 }

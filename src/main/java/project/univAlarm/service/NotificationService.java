@@ -1,7 +1,7 @@
 package project.univAlarm.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -10,21 +10,16 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.univAlarm.crawler.CrawledNotificationDto;
-import project.univAlarm.detector.NotificationDetector;
 import project.univAlarm.domain.Notification;
 import project.univAlarm.domain.NotificationType;
 import project.univAlarm.domain.UserSubscription;
 import project.univAlarm.repository.NotificationRepository;
-import project.univAlarm.repository.NotificationTypeRepository;
-import project.univAlarm.repository.SchoolRepository;
 import project.univAlarm.repository.UserSubscriptionRepository;
 import project.univAlarm.service.dto.NotificationResponseDto;
 
 @Service
 @RequiredArgsConstructor
 public class NotificationService {
-    private final SchoolRepository schoolRepository;
-    private final NotificationTypeRepository notificationTypeRepository;
     private final NotificationRepository notificationRepository;
     private final UserSubscriptionRepository userSubscriptionRepository;
 
@@ -41,15 +36,20 @@ public class NotificationService {
     }
 
     @Transactional
-    public void saveNotifications(NotificationDetector detector, List<CrawledNotificationDto> crawledNotificationDtos) {
+    public List<Notification> saveNotifications(NotificationType notificationType, List<CrawledNotificationDto> crawledNotificationDtos) {
+        List<Notification> savedNotifications =  new ArrayList<>();
         for (CrawledNotificationDto crawledNotificationDto : crawledNotificationDtos) {
-            saveNotification(detector.getNotificationTypeId(), crawledNotificationDto);
+            Notification notification = saveNotification(notificationType, crawledNotificationDto);
+            if(notification != null) savedNotifications.add(notification);
         }
+        return savedNotifications;
     }
 
-    public void saveNotification(Long notificationTypeId, CrawledNotificationDto crawledNotificationDto) {
-        Optional<NotificationType> notificationType = notificationTypeRepository.findById(notificationTypeId);
-        Optional<Notification> notification = notificationRepository.findByNotificationTypeIdAndOriginId(notificationTypeId, crawledNotificationDto.getId());
-        notification.orElseGet(() -> notificationRepository.save(new Notification(notificationType.orElseThrow(), crawledNotificationDto)));
+    public Notification saveNotification(NotificationType notificationType, CrawledNotificationDto crawledNotificationDto) {
+        boolean notiExists = notificationRepository.existsByNotificationTypeIdAndOriginId(notificationType.getId(), crawledNotificationDto.getId());
+        if(!notiExists) {
+            return notificationRepository.save(new Notification(notificationType, crawledNotificationDto));
+        }
+        return null;
     }
 }

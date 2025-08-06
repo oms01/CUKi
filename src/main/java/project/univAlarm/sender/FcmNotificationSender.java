@@ -4,10 +4,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
-import org.springframework.stereotype.Component;
 
-@Component
-public class FcmNotificationSender {
+public class FcmNotificationSender implements NotificationSender{
 
     public boolean send(String target, PushNotificationDto pushNotificationDto) {
         Message message = Message.builder()

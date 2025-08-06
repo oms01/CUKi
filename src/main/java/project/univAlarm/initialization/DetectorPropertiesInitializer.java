@@ -30,20 +30,22 @@ public class DetectorPropertiesInitializer {
         for (NotificationDetector detector : detectors) {
             String universityName = detector.getUniversityName();
             String campusName = detector.getCampusName();
-            Optional<School> school = schoolService.findBySchoolNameAndCampus(universityName,
-                    campusName);
+
+            Optional<School> school = schoolService.findBySchoolNameAndCampus(universityName, campusName);
             if(school.isEmpty()) {
                 log.info("School not found : {} - {}", universityName, campusName);
                 continue;
             }
+            detector.setSchool(school.get());
+
             Optional<NotificationType> notificationType = notificationTypeService.findBySchoolAndDepartment(
                     school.get(), detector.getDepartmentName());
             if(notificationType.isEmpty()) {
                 log.info("NotificationType not found : {} - {}", universityName, campusName);
                 continue;
             }
-            detector.setNotificationTypeId(notificationType.get().getId());
 
+            detector.setNotificationType(notificationType.get());
         }
     }
 }

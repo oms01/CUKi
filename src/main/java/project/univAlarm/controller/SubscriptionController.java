@@ -51,9 +51,10 @@ public class SubscriptionController implements SubscriptionControllerDocs {
             @AuthenticationPrincipal CustomUserDetails userDetails,
             @RequestBody DeleteSubscriptionRequestDto requestDto
     ){
+        Long userId = Long.valueOf(userDetails.getUsername());
         Long notificationTypeId = requestDto.getUserSubscriptionId();
 
-        subscriptionService.delete(notificationTypeId);
+        subscriptionService.delete(userId, notificationTypeId);
         return ApiResponse.noContent();
     }
 }

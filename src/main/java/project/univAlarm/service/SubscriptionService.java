@@ -3,6 +3,7 @@ package project.univAlarm.service;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.univAlarm.domain.NotificationType;
@@ -31,18 +32,22 @@ public class SubscriptionService {
     @Transactional
     public UserSubscriptionResponseDto save(Long userId, Long notificationTypeId){
         Optional<NotificationType> notificationTypeOptional = notificationTypeRepository.findById(notificationTypeId);
-        Optional<User> userOptional = userRepository.findById(userId);
-        if(notificationTypeOptional.isEmpty() || userOptional.isEmpty()){
+        Optional<User> user = userRepository.findById(userId);
+        if(notificationTypeOptional.isEmpty() || user.isEmpty()){
             return null;
         }
         NotificationType notificationType = notificationTypeOptional.get();
-        User user = userOptional.get();
-        UserSubscription subscription = userSubscriptionRepository.save(new UserSubscription(user, notificationType));
+        UserSubscription subscription = userSubscriptionRepository.save(new UserSubscription(user.get(), notificationType));
         return new UserSubscriptionResponseDto(subscription);
     }
 
     @Transactional
-    public void delete(Long userSubscriptionId){
-        userSubscriptionRepository.deleteById(userSubscriptionId);
+    public void delete(Long userId, Long userSubscriptionId){
+        userSubscriptionRepository.findById(userSubscriptionId).ifPresent(userSubscription -> {
+            if(!userId.equals(userSubscription.getUser().getId())) {
+                throw new AccessDeniedException("Access denied");
+            }
+            userSubscriptionRepository.delete(userSubscription);
+        });
     }
 }

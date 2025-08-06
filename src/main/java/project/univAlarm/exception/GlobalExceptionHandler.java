@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handle500(Exception e) {
         e.printStackTrace();
-        return ApiResponse.internalServerError(e.getMessage());
+        return ApiResponse.internalServerError(null);
     }
 
 }

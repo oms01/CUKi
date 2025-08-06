@@ -1,6 +1,5 @@
 package project.univAlarm.service;
 
-import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -11,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.univAlarm.controller.dto.DeviceRequestDto;
 import project.univAlarm.controller.dto.UpdateDeviceRequestDto;
-import project.univAlarm.domain.User;
 import project.univAlarm.domain.Device;
+import project.univAlarm.domain.User;
 import project.univAlarm.repository.DeviceRepository;
 import project.univAlarm.repository.UserRepository;
 import project.univAlarm.service.dto.DeviceResponseDto;
@@ -36,14 +35,21 @@ public class DeviceService {
     @Transactional
     public DeviceResponseDto update(Long userId, UpdateDeviceRequestDto userDevice){
         Device device = findDeviceOrThrow(userId, userDevice.getId());
+        if(device==null){
+            return null;
+        }
         device.updateDeviceInfo(userDevice);
         return new DeviceResponseDto(device);
     }
 
     @Transactional
     public void delete(Long userId, Long deviceId){
-        Device device = findDeviceOrThrow(userId, deviceId);
-        deviceRepository.delete(device);
+        deviceRepository.findById(deviceId).ifPresent(device -> {
+            if (!userId.equals(device.getUser().getId())) {
+                throw new AccessDeniedException("Access denied");
+            }
+            deviceRepository.delete(device);
+        });
     }
 
     @Transactional(readOnly = true)
@@ -53,13 +59,14 @@ public class DeviceService {
     }
 
     private Device findDeviceOrThrow(Long userId, Long deviceId) {
-        Device device = deviceRepository.findById(deviceId)
-                .orElseThrow(() -> new EntityNotFoundException("Device with id: " + deviceId + " not found"));
-
-        if (!Objects.equals(userId, device.getUser().getId())) {
+        Optional<Device> device = deviceRepository.findById(deviceId);
+        if(device.isEmpty()){
+            return null;
+        }
+        if (!Objects.equals(userId, device.get().getUser().getId())) {
             throw new AccessDeniedException("Access denied");
         }
 
-        return device;
+        return device.get();
     }
 }

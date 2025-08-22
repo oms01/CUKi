@@ -15,7 +15,7 @@ import project.univAlarm.user.domain.User;
         uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "notification_type_id"}))
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserSubscription {
+public class Subscription {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class UserSubscription {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    public UserSubscription(User user, NotificationType notificationType) {
+    public Subscription(User user, NotificationType notificationType) {
         this.user = user;
         this.notificationType = notificationType;
     }

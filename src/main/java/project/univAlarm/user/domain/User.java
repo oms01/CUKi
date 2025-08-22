@@ -21,7 +21,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import project.univAlarm.device.domain.Device;
 import project.univAlarm.user.dto.UserJoinDto;
-import project.univAlarm.subscription.domain.UserSubscription;
+import project.univAlarm.subscription.domain.Subscription;
 
 @Entity
 @Table(name = "users")
@@ -60,7 +60,7 @@ public class User {
     private List<Device> devices = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserSubscription> userSubscriptions = new ArrayList<>();
+    private List<Subscription> subscriptions = new ArrayList<>();
 
     public User(UserJoinDto joinDto) {
         this.kakaoId = joinDto.getKakaoId();

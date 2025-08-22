@@ -12,21 +12,21 @@ import org.springframework.transaction.annotation.Transactional;
 import project.univAlarm.common.crawler.CrawledNotificationDto;
 import project.univAlarm.notification.domain.Notification;
 import project.univAlarm.notificationType.domain.NotificationType;
-import project.univAlarm.subscription.domain.UserSubscription;
+import project.univAlarm.subscription.domain.Subscription;
 import project.univAlarm.notification.repository.NotificationRepository;
-import project.univAlarm.subscription.repository.UserSubscriptionRepository;
+import project.univAlarm.subscription.repository.SubscriptionRepository;
 import project.univAlarm.notification.dto.NotificationResponseDto;
 
 @Service
 @RequiredArgsConstructor
 public class NotificationService {
     private final NotificationRepository notificationRepository;
-    private final UserSubscriptionRepository userSubscriptionRepository;
+    private final SubscriptionRepository subscriptionRepository;
 
     @Transactional(readOnly = true)
     public List<NotificationResponseDto> findSubscribedNotificationByUser(Long userId, int page) {
-        List<UserSubscription> subscriptionList = userSubscriptionRepository.findByUserId(userId);
-        List<NotificationType> notificationTypeList = subscriptionList.stream().map(UserSubscription::getNotificationType).toList();
+        List<Subscription> subscriptionList = subscriptionRepository.findByUserId(userId);
+        List<NotificationType> notificationTypeList = subscriptionList.stream().map(Subscription::getNotificationType).toList();
 
         Pageable pageable = PageRequest.of(page, 10, Sort.by(Direction.DESC, "createdAt"));
         List<Notification> notifications = notificationRepository.findByNotificationTypeIn(notificationTypeList, pageable);

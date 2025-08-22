@@ -2,7 +2,7 @@ package project.univAlarm.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import project.univAlarm.subscription.domain.UserSubscription;
+import project.univAlarm.subscription.domain.Subscription;
 
 @Getter @Setter
 public class UserSubscriptionResponseDto {
@@ -14,13 +14,13 @@ public class UserSubscriptionResponseDto {
     private String department;
     private String isDepartment;
 
-    public UserSubscriptionResponseDto(UserSubscription userSubscription){
-        this.id = userSubscription.getId();
-        this.userId = userSubscription.getUser().getId();
-        this.notificationTypeId = userSubscription.getNotificationType().getId();
-        this.schoolName = userSubscription.getNotificationType().getSchool().getName();
-        this.campus = userSubscription.getNotificationType().getSchool().getCampus();
-        this.department = userSubscription.getNotificationType().getName();
-        this.isDepartment = userSubscription.getNotificationType().getName();
+    public UserSubscriptionResponseDto(Subscription subscription){
+        this.id = subscription.getId();
+        this.userId = subscription.getUser().getId();
+        this.notificationTypeId = subscription.getNotificationType().getId();
+        this.schoolName = subscription.getNotificationType().getSchool().getName();
+        this.campus = subscription.getNotificationType().getSchool().getCampus();
+        this.department = subscription.getNotificationType().getName();
+        this.isDepartment = subscription.getNotificationType().getName();
     }
 }

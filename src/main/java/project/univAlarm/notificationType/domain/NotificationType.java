@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import project.univAlarm.notification.domain.Notification;
 import project.univAlarm.school.domain.School;
-import project.univAlarm.subscription.domain.UserSubscription;
+import project.univAlarm.subscription.domain.Subscription;
 
 @Entity
 @Table(name = "notification_types")
@@ -42,7 +42,7 @@ public class NotificationType {
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "notificationType")
-    private List<UserSubscription> userSubscriptions = new ArrayList<>();
+    private List<Subscription> subscriptions = new ArrayList<>();
 
     @OneToMany(mappedBy = "notificationType")
     private List<Notification> notifications = new ArrayList<>();

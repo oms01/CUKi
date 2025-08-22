@@ -1,0 +1,29 @@
+package project.univAlarm.school.service;
+
+import java.util.List;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import project.univAlarm.school.domain.School;
+import project.univAlarm.school.repository.SchoolRepository;
+import project.univAlarm.school.dto.SchoolResponseDto;
+
+@Service
+@RequiredArgsConstructor
+public class SchoolService {
+    private final SchoolRepository schoolRepository;
+
+    @Transactional(readOnly = true)
+    public List<SchoolResponseDto> findAll() {
+        List<School> schools = schoolRepository.findAllByOrderByNameAsc();
+        return schools.stream()
+                .map(SchoolResponseDto::new)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<School> findBySchoolNameAndCampus(String schoolName, String campus) {
+        return schoolRepository.findByNameAndCampus(schoolName, campus);
+    }
+}

@@ -5,11 +5,11 @@
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
-//import project.univAlarm.domain.User;
-//import project.univAlarm.repository.UserRepository;
-//import project.univAlarm.controller.dto.DeviceRequestDto;
-//import project.univAlarm.service.dto.DeviceResponseDto;
-//import project.univAlarm.service.dto.UserJoinDto;
+//import project.univAlarm.user.domain.User;
+//import project.univAlarm.user.repository.UserRepository;
+//import project.univAlarm.Device.dto.DeviceRequestDto;
+//import project.univAlarm.Device.dto.DeviceResponseDto;
+//import project.univAlarm.user.dto.UserJoinDto;
 //
 //@SpringBootTest
 //class DeviceServiceTest {

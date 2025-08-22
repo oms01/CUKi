@@ -1,0 +1,23 @@
+package project.univAlarm.device.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+import project.univAlarm.device.domain.Device;
+
+@Getter
+@Setter
+public class DeviceResponseDto {
+    private Long id;
+    private Long userId;
+    private String name;
+    private String token;
+    private String platform;
+
+    public DeviceResponseDto(Device device) {
+        this.id = device.getId();
+        this.userId = device.getUser().getId();
+        this.name = device.getName();
+        this.token = device.getToken();
+        this.platform = device.getPlatform();
+    }
+}

@@ -3,7 +3,7 @@ package project.univAlarm;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import project.univAlarm.config.UnivConfigProperties;
+import project.univAlarm.common.config.UnivConfigProperties;
 
 @SpringBootApplication
 @EnableConfigurationProperties(UnivConfigProperties.class)

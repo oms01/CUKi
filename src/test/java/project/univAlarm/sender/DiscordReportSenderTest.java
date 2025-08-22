@@ -1,10 +1,11 @@
 package project.univAlarm.sender;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import project.univAlarm.external.sender.PushNotificationReport;
+import project.univAlarm.external.sender.dto.PushNotificationDto;
+import project.univAlarm.external.sender.sender.DiscordReportSender;
 import reactor.core.publisher.Mono;
 
 @SpringBootTest

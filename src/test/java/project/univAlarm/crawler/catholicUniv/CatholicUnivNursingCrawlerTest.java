@@ -1,12 +1,11 @@
 package project.univAlarm.crawler.catholicUniv;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import project.univAlarm.crawler.CrawledNotificationDto;
+import project.univAlarm.common.crawler.CrawledNotificationDto;
+import project.univAlarm.common.crawler.catholicUniv.CatholicUnivMedicineCrawler;
 
 class CatholicUnivNursingCrawlerTest {
     private CatholicUnivMedicineCrawler crawler = new CatholicUnivMedicineCrawler();

@@ -9,7 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import project.univAlarm.common.crawler.CrawledNotificationDto;
+import project.univAlarm.external.crawler.CrawledNotificationDto;
 import project.univAlarm.notification.domain.Notification;
 import project.univAlarm.notificationType.domain.NotificationType;
 import project.univAlarm.subscription.domain.Subscription;

@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import project.univAlarm.common.crawler.CrawledNotificationDto;
-import project.univAlarm.common.crawler.catholicUniv.CatholicUnivMedicineCrawler;
+import project.univAlarm.external.crawler.CrawledNotificationDto;
+import project.univAlarm.external.crawler.catholicUniv.CatholicUnivMedicineCrawler;
 
 class CatholicUnivMedicineCrawlerTest {
     private CatholicUnivMedicineCrawler crawler = new CatholicUnivMedicineCrawler();

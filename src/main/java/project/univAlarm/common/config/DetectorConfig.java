@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import project.univAlarm.common.config.UnivConfigProperties.UnivConfig;
 import project.univAlarm.common.config.UnivConfigProperties.UnivConfig.Campus;
 import project.univAlarm.common.config.UnivConfigProperties.UnivConfig.Campus.UrlEntry;
-import project.univAlarm.common.crawler.catholicUniv.Crawler;
+import project.univAlarm.external.crawler.catholicUniv.Crawler;
 import project.univAlarm.common.detector.NotificationDetector;
 
 @Configuration

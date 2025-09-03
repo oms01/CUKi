@@ -11,7 +11,7 @@ import project.univAlarm.notificationType.domain.NotificationType;
 import project.univAlarm.user.domain.User;
 
 @Entity
-@Table(name = "user_subscriptions",
+@Table(name = "subscriptions",
         uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "notification_type_id"}))
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

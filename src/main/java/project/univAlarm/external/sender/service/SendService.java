@@ -22,7 +22,7 @@ public class SendService {
 
         PushNotificationDto pushNotificationDto = new PushNotificationDto(notification);
 
-        List<Device> targets = deviceRepository.findByNotificationTypeId(
+        List<Device> targets = deviceRepository.findDevicesByNotificationTypeId(
                 notification.getNotificationType().getId());
 
         report.setNotification(pushNotificationDto);

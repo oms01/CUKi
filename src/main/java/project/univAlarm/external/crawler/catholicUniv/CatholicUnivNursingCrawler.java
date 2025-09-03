@@ -1,4 +1,4 @@
-package project.univAlarm.common.crawler.catholicUniv;
+package project.univAlarm.external.crawler.catholicUniv;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
-import project.univAlarm.common.crawler.CrawledNotificationDto;
+import project.univAlarm.external.crawler.CrawledNotificationDto;
 
 @Component
 public class CatholicUnivNursingCrawler implements Crawler {

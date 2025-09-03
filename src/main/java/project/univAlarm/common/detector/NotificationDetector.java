@@ -7,8 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import project.univAlarm.common.crawler.CrawledNotificationDto;
-import project.univAlarm.common.crawler.catholicUniv.Crawler;
+import project.univAlarm.external.crawler.CrawledNotificationDto;
+import project.univAlarm.external.crawler.catholicUniv.Crawler;
 import project.univAlarm.notificationType.domain.NotificationType;
 import project.univAlarm.school.domain.School;
 

@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
-import project.univAlarm.common.crawler.CrawledNotificationDto;
+import project.univAlarm.external.crawler.CrawledNotificationDto;
 import project.univAlarm.notification.domain.Notification;
 import project.univAlarm.external.sender.sender.DiscordReportSender;
 import project.univAlarm.external.sender.dto.PushNotificationDto;

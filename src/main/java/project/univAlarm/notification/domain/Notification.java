@@ -15,7 +15,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import project.univAlarm.common.crawler.CrawledNotificationDto;
+import project.univAlarm.external.crawler.CrawledNotificationDto;
 import project.univAlarm.notificationType.domain.NotificationType;
 
 @Entity

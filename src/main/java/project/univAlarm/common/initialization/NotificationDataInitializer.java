@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import project.univAlarm.common.crawler.CrawledNotificationDto;
+import project.univAlarm.external.crawler.CrawledNotificationDto;
 import project.univAlarm.common.detector.NotificationDetector;
 import project.univAlarm.notification.service.NotificationService;
 

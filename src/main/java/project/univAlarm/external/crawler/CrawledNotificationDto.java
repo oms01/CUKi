@@ -1,4 +1,4 @@
-package project.univAlarm.common.crawler;
+package project.univAlarm.external.crawler;
 
 import java.util.Objects;
 import lombok.Getter;

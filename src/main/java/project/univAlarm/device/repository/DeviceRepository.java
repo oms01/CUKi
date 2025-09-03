@@ -13,8 +13,8 @@ public interface DeviceRepository extends JpaRepository<Device, Long> {
     SELECT d
     FROM Device d
     JOIN d.user u
-    JOIN UserSubscription us ON us.user = u
+    JOIN Subscription us ON us.user = u
     WHERE us.notificationType.id = :notificationTypeId
 """)
-    List<Device> findByNotificationTypeId(@Param("notificationTypeId") Long notificationTypeId);
+    List<Device> findDevicesByNotificationTypeId(@Param("notificationTypeId") Long notificationTypeId);
 }

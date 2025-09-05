@@ -13,7 +13,7 @@ import project.univAlarm.external.crawler.CrawledNotificationDto;
 public class CatholicUnivDefaultCrawler implements Crawler {
     @Override
     public ArrayList<CrawledNotificationDto> crawl(String baseUrl) throws IOException {
-        Document doc = Jsoup.connect(baseUrl).get();
+        Document doc = Jsoup.connect(baseUrl).timeout(1000).get();
 
         Elements rows = doc.select("tbody tr");
         ArrayList<CrawledNotificationDto> notifications = new ArrayList<>();

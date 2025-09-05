@@ -14,7 +14,7 @@ public class CatholicUnivNursingCrawler implements Crawler {
 
     @Override
     public ArrayList<CrawledNotificationDto> crawl(String baseUrl) throws IOException {
-        Document doc = Jsoup.connect(baseUrl).get();
+        Document doc = Jsoup.connect(baseUrl).timeout(1000).get();
         Elements rows = doc.select("table.board_list > tbody > tr");
         ArrayList<CrawledNotificationDto> notifications = new ArrayList<>();
         for (Element row : rows) {

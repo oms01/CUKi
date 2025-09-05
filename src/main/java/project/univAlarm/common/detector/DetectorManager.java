@@ -3,11 +3,16 @@ package project.univAlarm.common.detector;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 import project.univAlarm.external.crawler.CrawledNotificationDto;
@@ -31,56 +36,68 @@ public class DetectorManager {
     private final SendService sendService;
     private final DiscordReportSender discordReportSender;
 
-    private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+    @Value("${scheduler.detector.thread_count}")
+    private int threadCount;
+    @Value("${scheduler.detector.interval}")
+    private int executionIntervalSeconds;
 
-    public void startScheduledTask(){
-        scheduler.scheduleAtFixedRate(()->{
-            try{
-                run();
-            } catch (Exception e){
-                log.error("Scheduled task failed", e);
-            }
-        },0,60, TimeUnit.SECONDS);
+    private ScheduledExecutorService detectorExecutor;
+
+    public void startScheduledTask() {
+        detectorExecutor = Executors.newScheduledThreadPool(threadCount); //스레드 풀 생성
+
+        int intervalBetweenDetectors = executionIntervalSeconds * 1000 / detectors.size(); // 밀리초 단위
+
+        log.info("Starting {} detectors with {} threads, execution interval: {}s, detector interval: {}ms",
+                detectors.size(), threadCount, executionIntervalSeconds, intervalBetweenDetectors);
+
+        for (int i = 0; i < detectors.size(); i++) {
+            NotificationDetector detector = detectors.get(i);
+            final int initialDelay = i * intervalBetweenDetectors;
+
+            detectorExecutor.scheduleAtFixedRate(() -> {
+                executeDetectorAsync(detector);
+            }, initialDelay, executionIntervalSeconds * 1000L, TimeUnit.MILLISECONDS);
+        }
     }
 
-    public void run() throws IOException {
-        long start = System.currentTimeMillis();
+    private void executeDetectorAsync(NotificationDetector detector) {
+        CompletableFuture.runAsync(() -> {
+            try {
+//                log.info("[{}] Detector {} starting execution", DateFormatter.currentTimeFormatted(), detector.getDepartmentName());
+                runSingleDetector(detector);
+            } catch (Exception e) {
+                log.error("Detector {} failed", detector.getSchool()+"/"+detector.getCampusName()+" "+detector.getDepartmentName(), e);
+            }
+        }, detectorExecutor);
+    }
 
-        List<Notification> updatedNotifications = new ArrayList<>();
+    public void runSingleDetector(NotificationDetector detector) throws IOException{
+        List<CrawledNotificationDto> crawledNotificationDtos = detector.runDetector();
+        List<Notification> updatedNotifications = notificationService.saveNotifications(detector.getNotificationType(),
+                crawledNotificationDtos);
 
-        for (NotificationDetector detector : detectors) {
-            
-            // 새로 감지된 공지사항 가져오기
-            List<CrawledNotificationDto> crawledNotificationDtos = detector.runDetector();
-
-            // 저장 성공한 공지 가져오기
-            List<Notification> savedNotifications = notificationService.saveNotifications(detector.getNotificationType(),
-                    crawledNotificationDtos);
-            updatedNotifications.addAll(savedNotifications);
-        }
-
-
-        for (Notification notification : updatedNotifications) {
+        for (Notification notification : updatedNotifications){
             PushNotificationReport report = sendService.send(notification);
-
-            PushNotificationReport pushNotificationReport = new PushNotificationReport();
-            pushNotificationReport.setNotification(new PushNotificationDto(notification));
-            pushNotificationReport.addCount(report.getTotalCount(), report.getSuccessCount(), report.getFailureCount());
-
-            Mono<Boolean> send = discordReportSender.send(pushNotificationReport);
-
-            send.subscribe(
-                    success -> {
-                        if(success) {
-                            log.info("Notification sent successfully");
-                        } else {
-                            log.info("Notification sent failed");
-                        }
-                    }
-            );
+            sendDiscordReport(report, notification);
         }
+    }
 
-        long end = System.currentTimeMillis();
-        log.info("[{}] {} Change Detector finished in {} ms", DateFormatter.currentTimeFormatted(), detectors.size(), end - start);
+    void sendDiscordReport(PushNotificationReport report, Notification notification) {
+        PushNotificationReport pushNotificationReport = new PushNotificationReport();
+        pushNotificationReport.setNotification(new PushNotificationDto(notification));
+        pushNotificationReport.addCount(report.getTotalCount(), report.getSuccessCount(), report.getFailureCount());
+
+        Mono<Boolean> send = discordReportSender.send(pushNotificationReport);
+
+        send.subscribe(
+                success -> {
+                    if(success) {
+                        log.info("Notification sent successfully");
+                    } else {
+                        log.info("Notification sent failed");
+                    }
+                }
+        );
     }
 }

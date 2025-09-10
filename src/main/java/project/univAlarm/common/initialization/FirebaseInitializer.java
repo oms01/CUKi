@@ -13,7 +13,7 @@ public class FirebaseInitializer {
     @Value("${fcm.file_name}")
     private String filePath;
 
-    public void initialize() {
+    public void init() {
         try{
             ClassPathResource resource = new ClassPathResource(filePath);
             FirebaseOptions options = new FirebaseOptions.Builder()

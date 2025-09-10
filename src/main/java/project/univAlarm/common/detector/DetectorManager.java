@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
+import project.univAlarm.common.initialization.dto.SimpleNotificationDto;
 import project.univAlarm.external.crawler.CrawledNotificationDto;
 import project.univAlarm.notification.domain.Notification;
 import project.univAlarm.external.sender.sender.DiscordReportSender;
@@ -64,26 +65,33 @@ public class DetectorManager {
     private void executeDetectorAsync(NotificationDetector detector) {
         CompletableFuture.runAsync(() -> {
             try {
-//                log.info("[{}] Detector {} starting execution", DateFormatter.currentTimeFormatted(), detector.getDepartmentName());
+                log.info("[{}] Detector {} starting execution", DateFormatter.currentTimeFormatted(), detector.getSimpleNotificationTypeDto().getName());
                 runSingleDetector(detector);
             } catch (Exception e) {
-                log.error("Detector {} failed", detector.getSchool()+"/"+detector.getCampusName()+" "+detector.getDepartmentName(), e);
+                log.error("Detector {} failed", detector.getSimpleNotificationTypeDto().toString(), e);
             }
         }, detectorExecutor);
     }
 
     public void runSingleDetector(NotificationDetector detector) throws IOException{
         List<CrawledNotificationDto> crawledNotificationDtos = detector.runDetector();
-        List<Notification> updatedNotifications = notificationService.saveNotifications(detector.getNotificationType(),
-                crawledNotificationDtos);
 
-        for (Notification notification : updatedNotifications){
-            PushNotificationReport report = sendService.send(notification);
-            sendDiscordReport(report, notification);
+        List<SimpleNotificationDto> updatedNotifications = new ArrayList<>();
+        for (CrawledNotificationDto crawledNotificationDto : crawledNotificationDtos) {
+            boolean exist = notificationService.isExist(detector.getSimpleNotificationTypeDto().getId(),
+                    crawledNotificationDto.getId());
+            if (!exist) updatedNotifications.add(new SimpleNotificationDto(detector.getSimpleNotificationTypeDto(), crawledNotificationDto));
+        }
+
+        notificationService.saveNotifications(updatedNotifications);
+
+        for (SimpleNotificationDto updatedNotification : updatedNotifications) {
+            PushNotificationReport report = sendService.send(updatedNotification);
+            sendDiscordReport(report, updatedNotification);
         }
     }
 
-    void sendDiscordReport(PushNotificationReport report, Notification notification) {
+    void sendDiscordReport(PushNotificationReport report, SimpleNotificationDto notification) {
         PushNotificationReport pushNotificationReport = new PushNotificationReport();
         pushNotificationReport.setNotification(new PushNotificationDto(notification));
         pushNotificationReport.addCount(report.getTotalCount(), report.getSuccessCount(), report.getFailureCount());

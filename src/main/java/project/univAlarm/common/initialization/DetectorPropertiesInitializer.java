@@ -2,15 +2,19 @@ package project.univAlarm.common.initialization;
 
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.univAlarm.common.detector.NotificationDetector;
+import project.univAlarm.common.initialization.dto.SimpleNotificationTypeDto;
+import project.univAlarm.common.utils.DateFormatter;
 import project.univAlarm.notificationType.domain.NotificationType;
 import project.univAlarm.school.domain.School;
 import project.univAlarm.notificationType.service.NotificationTypeService;
+import project.univAlarm.school.dto.SchoolResponseDto;
 import project.univAlarm.school.service.SchoolService;
 
 @Component
@@ -19,33 +23,21 @@ import project.univAlarm.school.service.SchoolService;
 public class DetectorPropertiesInitializer {
 
     private final List<NotificationDetector> detectors;
-    private final SchoolService schoolService;
-    private final NotificationTypeService notificationTypeService;
 
     /**
      * detector에 notificationTypeId 저장
      */
     @Transactional(readOnly = true)
-    public void initializeDetectorProperties() {
+    public void init(Map<String, SimpleNotificationTypeDto> notificationTypeIds) {
         for (NotificationDetector detector : detectors) {
-            String universityName = detector.getUniversityName();
-            String campusName = detector.getCampusName();
 
-            Optional<School> school = schoolService.findBySchoolNameAndCampus(universityName, campusName);
-            if(school.isEmpty()) {
-                log.info("School not found : {} - {}", universityName, campusName);
+            String url = detector.getBaseurl();
+            SimpleNotificationTypeDto dto = notificationTypeIds.get(url);
+            if(dto == null) {
+                log.info("[{}] Notification Type not found", DateFormatter.currentTimeFormatted());
                 continue;
             }
-            detector.setSchool(school.get());
-
-            Optional<NotificationType> notificationType = notificationTypeService.findBySchoolAndDepartment(
-                    school.get(), detector.getDepartmentName());
-            if(notificationType.isEmpty()) {
-                log.info("NotificationType not found : {} - {}", universityName, campusName);
-                continue;
-            }
-
-            detector.setNotificationType(notificationType.get());
+            detector.setSimpleNotificationTypeDto(dto);
         }
     }
 }

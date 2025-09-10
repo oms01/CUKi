@@ -12,6 +12,7 @@ import project.univAlarm.common.config.UnivConfigProperties.UnivConfig.Campus;
 import project.univAlarm.common.config.UnivConfigProperties.UnivConfig.Campus.UrlEntry;
 import project.univAlarm.external.crawler.catholicUniv.Crawler;
 import project.univAlarm.common.detector.NotificationDetector;
+import project.univAlarm.school.dto.SchoolResponseDto;
 
 @Configuration
 @RequiredArgsConstructor
@@ -32,7 +33,7 @@ public class DetectorConfig {
                     continue;
                 }
                 for (UrlEntry entity : campus.getUrls()) {
-                    NotificationDetector detector = createNotificationDetector(config, entity, crawler, campus);
+                    NotificationDetector detector = createNotificationDetector(entity.getUrl(), crawler);
                     detectors.add(detector);
                 }
             }
@@ -40,13 +41,9 @@ public class DetectorConfig {
         return detectors;
     }
 
-    private NotificationDetector createNotificationDetector(UnivConfig config, UrlEntry entity, Crawler crawler, Campus campus) {
+    private NotificationDetector createNotificationDetector(String url, Crawler crawler) {
         NotificationDetector detector = new NotificationDetector();
-        detector.setDepartment(entity.isDepartment());
-        detector.setUniversityName(config.getUnivName());
-        detector.setCampusName(campus.getName());
-        detector.setDepartmentName(entity.getName());
-        detector.setBaseurl(entity.getUrl());
+        detector.setBaseurl(url);
         detector.setCrawler(crawler);
         return detector;
     }

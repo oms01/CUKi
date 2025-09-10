@@ -7,10 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import project.univAlarm.common.initialization.dto.SimpleNotificationTypeDto;
+import project.univAlarm.common.initialization.dto.SimpleSchoolDto;
 import project.univAlarm.external.crawler.CrawledNotificationDto;
 import project.univAlarm.external.crawler.catholicUniv.Crawler;
 import project.univAlarm.notificationType.domain.NotificationType;
 import project.univAlarm.school.domain.School;
+import project.univAlarm.school.dto.SchoolResponseDto;
 
 @Slf4j
 @Getter @Setter
@@ -19,13 +22,8 @@ public class NotificationDetector {
 
     private String baseurl;
     private Crawler crawler;
-    private NotificationType notificationType;
-    private School school;
+    private SimpleNotificationTypeDto simpleNotificationTypeDto;
 
-    private String universityName;
-    private String campusName;
-    private String departmentName;
-    private boolean department;
     private List<CrawledNotificationDto> notificationList = new ArrayList<>();
 
     public List<CrawledNotificationDto> initializeDetector() throws IOException {

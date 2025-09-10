@@ -18,11 +18,10 @@ public class AdminAccountInitializer {
 
 
     @Transactional
-    public void initializeAdminAccount() {
+    public void init() {
         UserJoinDto adminJoinDto = createAdminJoinDto();
 
         User admin = loginService.joinProcess(adminJoinDto, Role.ADMIN.getRoles());
-
         String token = loginService.createToken(admin, 60L*60*24*365*100);
 
         log.info("Admin account token : [{}]", token);

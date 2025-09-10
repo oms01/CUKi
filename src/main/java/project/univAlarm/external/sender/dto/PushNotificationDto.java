@@ -3,6 +3,7 @@ package project.univAlarm.external.sender.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import project.univAlarm.common.initialization.dto.SimpleNotificationDto;
 import project.univAlarm.notification.domain.Notification;
 
 @Getter @Setter
@@ -22,6 +23,15 @@ public class PushNotificationDto {
         this.date = notification.getDate();
         this.writer = notification.getWriter();
         this.link = notification.getLink();
+    }
+
+    public PushNotificationDto(SimpleNotificationDto simpleNotificationDto) {
+        this.schoolName = simpleNotificationDto.getSimpleNotificationTypeDto().getSimpleSchoolDto().getName();
+        this.kind = simpleNotificationDto.getSimpleNotificationTypeDto().getName();
+        this.title = simpleNotificationDto.getTitle();
+        this.date = simpleNotificationDto.getDate();
+        this.writer = simpleNotificationDto.getWriter();
+        this.link = simpleNotificationDto.getLink();
     }
 
     public String toString() {

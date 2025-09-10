@@ -15,4 +15,9 @@ public class SchoolResponseDto {
         this.schoolName = school.getName();
         this.campus = school.getCampus();
     }
+
+    @Override
+    public String toString() {
+        return getId() + " " + getSchoolName() + " " + getCampus();
+    }
 }

@@ -4,8 +4,8 @@ spring:
   config:
     import:
       - classpath:/universityConfig/CatholicUnivConfig.yaml
-#      - classpath:config/h2.yaml
-      - classpath:config/mysql.yaml
+      - classpath:config/h2.yaml
+#      - classpath:config/mysql.yaml
       - classpath:config/env.yaml
   jpa:
     hibernate:
@@ -17,6 +17,11 @@ spring:
   web:
     resources:
       add-mappings: false
+
+
+logging:
+  level:
+    org.springframework.jdbc.core.JdbcTemplate: DEBUG
 
 springdoc:
   default-produces-media-type: application/json

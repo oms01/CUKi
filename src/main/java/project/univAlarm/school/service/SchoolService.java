@@ -10,14 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-<<<<<<< HEAD
-=======
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
->>>>>>> 2294ff5 (Refactor Init)
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.univAlarm.common.initialization.dto.SimpleSchoolDto;
@@ -30,10 +25,7 @@ import project.univAlarm.school.dto.SchoolResponseDto;
 @RequiredArgsConstructor
 public class SchoolService {
     private final SchoolRepository schoolRepository;
-<<<<<<< HEAD
-=======
     private final JdbcTemplate jdbcTemplate;
->>>>>>> 2294ff5 (Refactor Init)
 
     @Transactional(readOnly = true)
     public List<SchoolResponseDto> findAll() {
@@ -78,8 +70,4 @@ public class SchoolService {
         });
         return schoolIds;
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 2294ff5 (Refactor Init)
 }

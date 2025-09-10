@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -79,9 +78,4 @@ public class NotificationTypeService {
         });
         return result;
     }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 2294ff5 (Refactor Init)
 }

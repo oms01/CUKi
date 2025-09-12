@@ -19,7 +19,6 @@ public class DataInitializationRunner implements ApplicationRunner {
     private final SchoolInitializer schoolInitializer;
     private final NotificationTypeInitializer notificationTypeInitializer;
     private final NotificationInitializer notificationInitializer;
-    private final FirebaseInitializer firebaseInitializer;
     private final DetectorPropertiesInitializer detectorPropertiesInitializer;
     private final AdminAccountInitializer adminAccountInitializer;
     private final DetectorManager detectorManager;
@@ -38,9 +37,6 @@ public class DataInitializationRunner implements ApplicationRunner {
 
         notificationInitializer.init();
         log.info("[{}] Notification Data Initializing Complete", DateFormatter.currentTimeFormatted());
-
-        firebaseInitializer.init();
-        log.info("[{}] Firebase Initializing Complete", DateFormatter.currentTimeFormatted());
 
         adminAccountInitializer.init();
         log.info("[{}] Admin Account Initializing Complete", DateFormatter.currentTimeFormatted());

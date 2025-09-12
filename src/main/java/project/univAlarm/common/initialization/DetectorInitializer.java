@@ -25,4 +25,17 @@ public class DetectorInitializer {
         }
         return simpleNotificationDtos;
     }
+
+    public List<SimpleNotificationDto> initV2() throws IOException {
+        return detectors.parallelStream() // 병렬 처리
+                .flatMap(detector -> {
+                    try {
+                        return detector.initializeDetector().stream()
+                                .map(c -> new SimpleNotificationDto(detector.getSimpleNotificationTypeDto(), c));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .toList();
+    }
 }

@@ -30,7 +30,7 @@ public class DataInitializationRunner implements ApplicationRunner {
         log.info("[{}] School Initializing Complete", DateFormatter.currentTimeFormatted());
 
         Map<String, SimpleNotificationTypeDto> notificationTypeIds = notificationTypeInitializer.init(schoolIds); //url -> 공지 종류
-        log.info("[{}] School Initializing Complete", DateFormatter.currentTimeFormatted());
+        log.info("[{}] NotificationType Initializing Complete", DateFormatter.currentTimeFormatted());
 
         detectorPropertiesInitializer.init(notificationTypeIds);
         log.info("[{}] Detector Properties Initializing Complete", DateFormatter.currentTimeFormatted());

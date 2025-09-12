@@ -65,7 +65,7 @@ public class DetectorManager {
     private void executeDetectorAsync(NotificationDetector detector) {
         CompletableFuture.runAsync(() -> {
             try {
-                log.info("[{}] Detector {} starting execution", DateFormatter.currentTimeFormatted(), detector.getSimpleNotificationTypeDto().getName());
+//                log.info("[{}] Detector {} starting execution", DateFormatter.currentTimeFormatted(), detector.getSimpleNotificationTypeDto().getName());
                 runSingleDetector(detector);
             } catch (Exception e) {
                 log.error("Detector {} failed", detector.getSimpleNotificationTypeDto().toString(), e);

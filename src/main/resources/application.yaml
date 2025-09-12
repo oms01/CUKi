@@ -19,9 +19,9 @@ spring:
       add-mappings: false
 
 
-logging:
-  level:
-    org.springframework.jdbc.core.JdbcTemplate: DEBUG
+#logging:
+#  level:
+#    org.springframework.jdbc.core.JdbcTemplate: DEBUG
 
 springdoc:
   default-produces-media-type: application/json

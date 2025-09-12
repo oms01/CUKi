@@ -18,7 +18,7 @@ class NotificationDetectorTest {
     void crawlAllCatholicUnivDepartment(){
         for (NotificationDetector detector : detectors) {
             if(detector.getNotificationList().isEmpty()){
-                Assertions.fail("Crawling failed! : " + detector.getUniversityName() + "-" + detector.getDepartmentName());
+                Assertions.fail("Crawling failed! : " + detector.getSimpleNotificationTypeDto().toString());
             }
             for (CrawledNotificationDto notificationDto : detector.getNotificationList()) {
 //                System.out.println(notificationDto.toString());

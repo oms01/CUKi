@@ -29,9 +29,6 @@ public class SchoolInitializer {
     private final UnivConfigProperties univConfig;
     private final SchoolService schoolService;
 
-    /**
-     * school, notification Type 저장
-     */
     @Transactional
     public Map<String,SimpleSchoolDto> init() {
         List<SimpleSchoolDto> simpleSchools = getSimpleSchools();

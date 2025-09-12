@@ -27,7 +27,7 @@ class DetectorInitializerTest {
         for (int i = 0; i < iterations; i++) {
 
             long start = System.currentTimeMillis();
-            List<SimpleNotificationDto> c = detectorInitializer.init();
+            List<SimpleNotificationDto> c = detectorInitializer.initv1();
             long end = System.currentTimeMillis();
 
             long elapsed = end - start;
@@ -48,7 +48,7 @@ class DetectorInitializerTest {
         for (int i = 0; i < iterations; i++) {
 
             long start = System.currentTimeMillis();
-            List<SimpleNotificationDto> c = detectorInitializer.initV2();
+            List<SimpleNotificationDto> c = detectorInitializer.init();
             long end = System.currentTimeMillis();
 
             long elapsed = end - start;

@@ -15,7 +15,7 @@ public class DetectorInitializer {
 
     private final List<NotificationDetector> detectors;
 
-    public List<SimpleNotificationDto> init() throws IOException {
+    public List<SimpleNotificationDto> initv1() throws IOException {
         List<SimpleNotificationDto> simpleNotificationDtos = new ArrayList<>();
         for (NotificationDetector detector : detectors) {
             List<CrawledNotificationDto> crawledNotificationDtos = detector.initializeDetector();
@@ -26,7 +26,7 @@ public class DetectorInitializer {
         return simpleNotificationDtos;
     }
 
-    public List<SimpleNotificationDto> initV2() throws IOException {
+    public List<SimpleNotificationDto> init() {
         return detectors.parallelStream() // 병렬 처리
                 .flatMap(detector -> {
                     try {

@@ -27,7 +27,7 @@ public class DataInitializationRunner implements ApplicationRunner {
     private final DetectorManager detectorManager;
 
     @Override
-    public void run(ApplicationArguments args) throws IOException {
+    public void run(ApplicationArguments args) {
 
         Map<String, SimpleSchoolDto> schoolIds = schoolInitializer.init(); // 학교명:교정명 -> 학교정보
         Map<String, SimpleNotificationTypeDto> notificationTypeIds = notificationTypeInitializer.init(schoolIds); //url -> 공지 종류

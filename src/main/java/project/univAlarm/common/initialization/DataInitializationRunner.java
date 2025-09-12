@@ -18,7 +18,7 @@ import project.univAlarm.common.utils.DateFormatter;
 public class DataInitializationRunner implements ApplicationRunner {
     private final SchoolInitializer schoolInitializer;
     private final NotificationTypeInitializer notificationTypeInitializer;
-    private final NotificationDataInitializer notificationDataInitializer;
+    private final NotificationInitializer notificationInitializer;
     private final FirebaseInitializer firebaseInitializer;
     private final DetectorPropertiesInitializer detectorPropertiesInitializer;
     private final AdminAccountInitializer adminAccountInitializer;
@@ -36,7 +36,7 @@ public class DataInitializationRunner implements ApplicationRunner {
         detectorPropertiesInitializer.init(notificationTypeIds);
         log.info("[{}] Detector Properties Initializing Complete", DateFormatter.currentTimeFormatted());
 
-        notificationDataInitializer.init();
+        notificationInitializer.init();
         log.info("[{}] Notification Data Initializing Complete", DateFormatter.currentTimeFormatted());
 
         firebaseInitializer.init();

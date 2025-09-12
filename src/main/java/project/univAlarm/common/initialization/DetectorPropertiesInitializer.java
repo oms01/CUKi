@@ -24,9 +24,6 @@ public class DetectorPropertiesInitializer {
 
     private final List<NotificationDetector> detectors;
 
-    /**
-     * detector에 notificationTypeId 저장
-     */
     @Transactional(readOnly = true)
     public void init(Map<String, SimpleNotificationTypeDto> notificationTypeIds) {
         for (NotificationDetector detector : detectors) {

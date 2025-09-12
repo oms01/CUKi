@@ -32,7 +32,7 @@ class DataInitializationRunnerTest {
     private JdbcTemplate jdbcTemplate;
 
     @Test
-    void measureAverageExecutionTime() throws Exception {
+    void measureAverageExecutionTime() {
         int iterations = 100;
         long totalTime = 0;
 
@@ -44,15 +44,13 @@ class DataInitializationRunnerTest {
             Map<String, SimpleNotificationTypeDto> b = notificationTypeInitializer.init(a);
             detectorPropertiesInitializer.init(b);
 
-            long beforeCrawling = System.currentTimeMillis();
             List<SimpleNotificationDto> c = detectorInitializer.init(); // 크롤링
-            long afterCrawling = System.currentTimeMillis();
 
             notificationInitializer.init(c);
 
             long end = System.currentTimeMillis();
 
-            long elapsed = (end - start) - (afterCrawling - beforeCrawling);
+            long elapsed = (end - start);
             totalTime += elapsed;
 
             jdbcTemplate.execute("DELETE FROM notifications");

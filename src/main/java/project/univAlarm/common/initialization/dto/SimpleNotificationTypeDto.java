@@ -19,6 +19,6 @@ public class SimpleNotificationTypeDto {
 
     @Override
     public String toString() {
-        return simpleSchoolDto.toString() + " | " + name + " | " + isDepartment + " | " + url +"| : ";
+        return simpleSchoolDto.toString() + " | " + name + " | " + isDepartment + " | " + url +" | : ";
     }
 }

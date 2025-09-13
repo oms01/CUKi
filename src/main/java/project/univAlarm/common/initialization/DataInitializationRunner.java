@@ -34,7 +34,10 @@ public class DataInitializationRunner implements ApplicationRunner {
         detectorPropertiesInitializer.init(notificationTypeIds);
         log.info("[{}] Detector Properties Initializing Complete", DateFormatter.currentTimeFormatted());
 
+        long st = System.currentTimeMillis();
         List<SimpleNotificationDto> simpleNotificationDtos = detectorInitializer.init();
+        long en = System.currentTimeMillis();
+        log.info("[{}] Detector Initializing Complete {}ms", DateFormatter.currentTimeFormatted(), en - st);
         notificationInitializer.init(simpleNotificationDtos);
         log.info("[{}] Notification Data Initializing Complete", DateFormatter.currentTimeFormatted());
 

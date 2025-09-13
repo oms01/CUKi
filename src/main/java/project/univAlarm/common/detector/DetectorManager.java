@@ -68,7 +68,7 @@ public class DetectorManager {
 //                log.info("[{}] Detector {} starting execution", DateFormatter.currentTimeFormatted(), detector.getSimpleNotificationTypeDto().getName());
                 runSingleDetector(detector);
             } catch (Exception e) {
-                log.error("Detector {} failed", detector.getSimpleNotificationTypeDto().toString(), e);
+                log.error("Detector {} failed: {}", detector.getSimpleNotificationTypeDto().toString(), e.getMessage());
             }
         }, detectorExecutor);
     }

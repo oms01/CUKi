@@ -12,7 +12,7 @@ public class UserSubscriptionResponseDto {
     private String schoolName;
     private String campus;
     private String department;
-    private String isDepartment;
+    private boolean isDepartment;
 
     public UserSubscriptionResponseDto(Subscription subscription){
         this.id = subscription.getId();
@@ -21,6 +21,6 @@ public class UserSubscriptionResponseDto {
         this.schoolName = subscription.getNotificationType().getSchool().getName();
         this.campus = subscription.getNotificationType().getSchool().getCampus();
         this.department = subscription.getNotificationType().getName();
-        this.isDepartment = subscription.getNotificationType().getName();
+        this.isDepartment = subscription.getNotificationType().getIsDepartment();
     }
 }

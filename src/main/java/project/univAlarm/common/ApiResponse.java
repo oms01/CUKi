@@ -36,7 +36,7 @@ public class ApiResponse<T> {
     }
 
     public static ResponseEntity<ApiResponse<Void>> noContent() {
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(
+        return ResponseEntity.status(HttpStatus.OK).body(
                 ApiResponse.<Void>builder()
                         .status(HttpStatus.NO_CONTENT.value())
                         .message("no content")

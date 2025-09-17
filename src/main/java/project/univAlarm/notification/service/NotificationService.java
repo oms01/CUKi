@@ -37,7 +37,7 @@ public class NotificationService {
         List<Subscription> subscriptionList = subscriptionRepository.findByUserId(userId);
         List<NotificationType> notificationTypeList = subscriptionList.stream().map(Subscription::getNotificationType).toList();
 
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(Direction.DESC, "createdAt"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(Direction.DESC, "date"));
         List<Notification> notifications = notificationRepository.findByNotificationTypeIn(notificationTypeList, pageable);
         return notifications.stream()
                 .map(NotificationResponseDto::new)

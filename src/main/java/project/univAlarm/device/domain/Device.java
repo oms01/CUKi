@@ -42,6 +42,9 @@ public class Device {
     @Column(nullable = false)
     private String platform;
 
+    @Column(nullable = false)
+    private String model;
+
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -62,6 +65,7 @@ public class Device {
         this.name = deviceRequestDto.getName();
         this.token = deviceRequestDto.getToken();
         this.platform = deviceRequestDto.getPlatform();
+        this.model = deviceRequestDto.getModel();
     }
 
     public void updateToken(String token) {

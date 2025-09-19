@@ -37,7 +37,7 @@ public class NotificationService {
         List<Subscription> subscriptionList = subscriptionRepository.findByUserId(userId);
         List<NotificationType> notificationTypeList = subscriptionList.stream().map(Subscription::getNotificationType).toList();
 
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(Direction.DESC, "createdAt"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(Direction.DESC, "date"));
         List<Notification> notifications = notificationRepository.findByNotificationTypeIn(notificationTypeList, pageable);
         return notifications.stream()
                 .map(NotificationResponseDto::new)
@@ -45,7 +45,7 @@ public class NotificationService {
     }
 
     public boolean isExist(Long notificationTypeId, Long notificationOriginId) {
-        String sql = "SELECT notification_type_id FROM notification WHERE notification_type_id = ? AND origin_id = ?";
+        String sql = "SELECT notification_type_id FROM notifications WHERE notification_type_id = ? AND origin_id = ?";
         Long id = jdbcTemplate.queryForObject(sql, Long.class, notificationOriginId, notificationTypeId);
         return id != null;
     }

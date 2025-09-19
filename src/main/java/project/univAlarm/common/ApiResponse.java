@@ -3,6 +3,7 @@ package project.univAlarm.common;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -25,6 +26,18 @@ public class ApiResponse<T> {
         );
     }
 
+    public static <T> ResponseEntity<ApiResponse<T>> okWithAuthHeader(T data, String token) {
+        return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                .body(
+                        ApiResponse.<T>builder()
+                                .status(HttpStatus.OK.value())
+                                .message("success")
+                                .data(data)
+                                .build()
+                );
+    }
+
     public static <T> ResponseEntity<ApiResponse<T>> ok(T data, String message) {
         return ResponseEntity.ok(
                 ApiResponse.<T>builder()
@@ -36,7 +49,7 @@ public class ApiResponse<T> {
     }
 
     public static ResponseEntity<ApiResponse<Void>> noContent() {
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(
+        return ResponseEntity.status(HttpStatus.OK).body(
                 ApiResponse.<Void>builder()
                         .status(HttpStatus.NO_CONTENT.value())
                         .message("no content")

@@ -12,6 +12,7 @@ public class DeviceResponseDto {
     private String name;
     private String token;
     private String platform;
+    private String model;
 
     public DeviceResponseDto(Device device) {
         this.id = device.getId();
@@ -19,5 +20,6 @@ public class DeviceResponseDto {
         this.name = device.getName();
         this.token = device.getToken();
         this.platform = device.getPlatform();
+        this.model = device.getModel();
     }
 }

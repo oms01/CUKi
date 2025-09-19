@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import project.univAlarm.subscription.service.SubscriptionService;
 import project.univAlarm.user.domain.User;
 import project.univAlarm.common.security.enums.Role;
 import project.univAlarm.user.service.LoginService;
@@ -15,6 +16,7 @@ import project.univAlarm.user.dto.UserJoinDto;
 public class AdminAccountInitializer {
 
     private final LoginService loginService;
+    private final SubscriptionService subscriptionService;
 
 
     @Transactional
@@ -23,7 +25,10 @@ public class AdminAccountInitializer {
 
         User admin = loginService.joinProcess(adminJoinDto, Role.ADMIN.getRoles());
         String token = loginService.createToken(admin, 60L*60*24*365*100);
-
+        subscriptionService.save(admin.getId(), 1L);
+        subscriptionService.save(admin.getId(), 2L);
+        subscriptionService.save(admin.getId(), 3L);
+        subscriptionService.save(admin.getId(), 4L);
         log.info("Admin account token : [{}]", token);
     }
 

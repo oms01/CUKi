@@ -10,12 +10,14 @@ public class DeviceRequestDto {
     private String name;
     private String token;
     private String platform;
+    private String model;
 
     @Builder
-    public DeviceRequestDto(Long userId, String name, String token, String platform) {
+    public DeviceRequestDto(Long userId, String name, String token, String platform, String model) {
         this.userId = userId;
         this.name = name;
         this.token = token;
         this.platform = platform;
+        this.model = model;
     }
 }

@@ -1,6 +1,7 @@
 package project.univAlarm.common.exception;
 
 import javax.naming.AuthenticationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import project.univAlarm.common.ApiResponse;
 
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -30,7 +32,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handle500(Exception e) {
-        e.printStackTrace();
+        log.error(e.getMessage());
         return ApiResponse.internalServerError(null);
     }
 

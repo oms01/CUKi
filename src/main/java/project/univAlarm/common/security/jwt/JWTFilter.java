@@ -24,7 +24,7 @@ public class JWTFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String path = request.getRequestURI();
 
-        if (path.startsWith("/api/v1/auth/")) { //토큰 필요 X
+        if (path.startsWith("/api/v1/auth/") || path.startsWith("/swagger-ui") || path.startsWith("/v3/api-docs")) { //토큰 필요 X
             filterChain.doFilter(request, response);
             return;
         }

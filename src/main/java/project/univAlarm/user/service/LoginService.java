@@ -19,7 +19,8 @@ public class LoginService {
     private final JWTUtil jwtUtil;
     private final RedisTemplate<String,String> redisTemplate;
 
-    private final Long ACCESS_TOKEN_EXPIRATION_MS = 24 * 60 * 60 * 1000L;
+    private final Long ACCESS_TOKEN_EXPIRATION_MS = 5 * 1000L;
+//    private final Long ACCESS_TOKEN_EXPIRATION_MS = 24 * 60 * 60 * 1000L;
     private final Long REFRESH_TOKEN_EXPIRATION_MS = 30 * 24 * 60 * 60 * 1000L;
 
     private final String REFRESH_TOKEN_PREFIX = "refresh:";
@@ -44,7 +45,7 @@ public class LoginService {
     }
 
     public String createToken(Long userId, String role, Long second) {
-        return jwtUtil.createJwt(userId, role, second*1000L);
+        return jwtUtil.createJwt(userId, role, second);
     }
 
     public String createRefreshToken(Long userId) {

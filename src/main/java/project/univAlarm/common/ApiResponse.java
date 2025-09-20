@@ -45,7 +45,7 @@ public class ApiResponse<T> {
     public static <T> ResponseEntity<ApiResponse<T>> okWithAuthHeader(T data, String token, String refreshToken) {
         ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
                 .httpOnly(true)
-                .secure(true)
+                .secure(false)
                 .path("/")
                 .maxAge(REFRESH_TOKEN_EXPIRATION_MS)
                 .sameSite("Strict")

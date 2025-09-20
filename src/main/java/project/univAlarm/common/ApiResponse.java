@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 
 @Getter
@@ -29,6 +30,27 @@ public class ApiResponse<T> {
     public static <T> ResponseEntity<ApiResponse<T>> okWithAuthHeader(T data, String token) {
         return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                .body(
+                        ApiResponse.<T>builder()
+                                .status(HttpStatus.OK.value())
+                                .message("success")
+                                .data(data)
+                                .build()
+                );
+    }
+
+    public static <T> ResponseEntity<ApiResponse<T>> okWithAuthHeader(T data, String token, String refreshToken) {
+        ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
+                .httpOnly(true)
+                .secure(true)
+                .path("/")
+                .maxAge(7 * 24 * 60 * 60)
+                .sameSite("Strict")
+                .build();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .body(
                         ApiResponse.<T>builder()
                                 .status(HttpStatus.OK.value())

@@ -3,6 +3,7 @@ package project.univAlarm.common;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
@@ -16,6 +17,8 @@ public class ApiResponse<T> {
     private final int status;
     private final String message;
     private final T data;
+
+    private static final Long REFRESH_TOKEN_EXPIRATION_MS = 30 * 24 * 60 * 60 * 1000L;
 
     public static <T> ResponseEntity<ApiResponse<T>> ok(T data) {
         return ResponseEntity.ok(
@@ -44,7 +47,7 @@ public class ApiResponse<T> {
                 .httpOnly(true)
                 .secure(true)
                 .path("/")
-                .maxAge(7 * 24 * 60 * 60)
+                .maxAge(REFRESH_TOKEN_EXPIRATION_MS)
                 .sameSite("Strict")
                 .build();
 

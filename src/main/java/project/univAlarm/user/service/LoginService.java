@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import project.univAlarm.user.domain.User;
@@ -18,6 +19,10 @@ public class LoginService {
     private final JWTUtil jwtUtil;
     private final RedisTemplate<String,String> redisTemplate;
 
+    private final Long ACCESS_TOKEN_EXPIRATION_MS = 24 * 60 * 60 * 1000L;
+    private final Long REFRESH_TOKEN_EXPIRATION_MS = 30 * 24 * 60 * 60 * 1000L;
+
+    private final String REFRESH_TOKEN_PREFIX = "refresh:";
 
     public User joinProcess(UserJoinDto joinDTO, String role) {
 
@@ -28,25 +33,32 @@ public class LoginService {
             return OptionalUser.get();
         }
 
-        User data = new User(joinDTO);
-        data.setRole(role);
+        User user = new User(joinDTO);
+        user.setRole(role);
 
-        userRepository.save(data);
-        return data;
+        return userRepository.save(user);
+    }
+
+    public String createToken(Long userId, String role) {
+        return createToken(userId, role,  ACCESS_TOKEN_EXPIRATION_MS);
     }
 
     public String createToken(Long userId, String role, Long second) {
         return jwtUtil.createJwt(userId, role, second*1000L);
     }
 
+    public String createRefreshToken(Long userId) {
+        return createRefreshToken(userId, REFRESH_TOKEN_EXPIRATION_MS);
+    }
+
     public String createRefreshToken(Long userId, Long second) {
         String refreshToken = UUID.randomUUID().toString();
-        redisTemplate.opsForValue().set("refresh:" + refreshToken, String.valueOf(userId), Duration.ofSeconds(second));
+        redisTemplate.opsForValue().set(REFRESH_TOKEN_PREFIX + refreshToken, String.valueOf(userId), Duration.ofSeconds(second));
         return refreshToken;
     }
 
     public Optional<String> validateRefreshToken(String refreshToken) {
-        String userId = redisTemplate.opsForValue().get("refresh:" + refreshToken);
+        String userId = redisTemplate.opsForValue().get(REFRESH_TOKEN_PREFIX + refreshToken);
         return Optional.ofNullable(userId);
     }
 

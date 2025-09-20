@@ -36,8 +36,8 @@ public class LoginController implements LoginControllerDocs {
         KakaoUserInfoResponseDto userInfo = kakaoLoginService.getUserInfo(kakaoAccessToken); //카카오 유저 정보
 
         User user = loginService.joinProcess(new UserJoinDto(userInfo), Role.USER.getRoles());
-        String accessToken = loginService.createToken(user.getId(), user.getRole(), 60*60L);
-        String refreshToken = loginService.createRefreshToken(user.getId(), 60*60L);
+        String accessToken = loginService.createToken(user.getId(), user.getRole());
+        String refreshToken = loginService.createRefreshToken(user.getId());
         return ApiResponse.okWithAuthHeader(null, accessToken, refreshToken);
     }
 
@@ -63,7 +63,7 @@ public class LoginController implements LoginControllerDocs {
 
         UserResponseDto userResponseDto = userService.findById(Long.valueOf(userId));
 
-        String newAccessToken = loginService.createToken(Long.valueOf(userId), userResponseDto.getRole(), 60 * 60L);
+        String newAccessToken = loginService.createToken(Long.valueOf(userId), userResponseDto.getRole());
 
         return ApiResponse.okWithAuthHeader(null, newAccessToken);
     }

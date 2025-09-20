@@ -38,6 +38,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
         String token = authorization.split(" ")[1];
         if (isTokenExpired(token)) {
+            request.setAttribute("exception", "TOKEN_EXPIRED");
             throw new BadCredentialsException("JWT token has expired.");
         }
 

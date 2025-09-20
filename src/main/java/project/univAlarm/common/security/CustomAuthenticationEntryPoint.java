@@ -19,9 +19,16 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json");
+
+        String exception = (String) request.getAttribute("exception");
+        String message = "Login is required.";
+        if ("TOKEN_EXPIRED".equals(exception)) {
+            message = "Access token has expired.";
+        }
+
         ApiResponse<Void> apiResponse = ApiResponse.<Void>builder()
                 .status(HttpServletResponse.SC_UNAUTHORIZED)
-                .message("Login is required.")
+                .message(message)
                 .build();
 
         ObjectMapper mapper = new ObjectMapper();

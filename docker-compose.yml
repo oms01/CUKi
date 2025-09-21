@@ -33,6 +33,8 @@ services:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
       DISCORD_WEBHOOK: ${DISCORD_WEBHOOK}
       CLIENT_ID: ${CLIENT_ID}
       REDIRECT_URI: ${REDIRECT_URI}
@@ -42,8 +44,24 @@ services:
     networks:
       - backend-network
 
+  redis:
+    image: redis:7.4-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - backend-network
+    command: [ "redis-server", "--appendonly", "yes" ]
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      retries: 5
+
 volumes:
   mysql-data:
+  redis-data:
 
 networks:
   backend-network:

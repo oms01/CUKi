@@ -24,7 +24,7 @@ public class AdminAccountInitializer {
         UserJoinDto adminJoinDto = createAdminJoinDto();
 
         User admin = loginService.joinProcess(adminJoinDto, Role.ADMIN.getRoles());
-        String token = loginService.createToken(admin, 60L*60*24*365*100);
+        String token = loginService.createToken(admin.getId(), admin.getRole(), 60L*60*24*365*100);
         subscriptionService.save(admin.getId(), 1L);
         subscriptionService.save(admin.getId(), 2L);
         subscriptionService.save(admin.getId(), 3L);

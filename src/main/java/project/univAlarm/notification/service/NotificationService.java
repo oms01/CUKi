@@ -45,9 +45,9 @@ public class NotificationService {
     }
 
     public boolean isExist(Long notificationTypeId, Long notificationOriginId) {
-        String sql = "SELECT notification_type_id FROM notifications WHERE notification_type_id = ? AND origin_id = ?";
-        Long id = jdbcTemplate.queryForObject(sql, Long.class, notificationOriginId, notificationTypeId);
-        return id != null;
+        String sql = "SELECT 1 FROM notifications WHERE notification_type_id = ? AND origin_id = ? LIMIT 1";
+        List<Integer> result = jdbcTemplate.queryForList(sql, Integer.class, notificationTypeId, notificationOriginId);
+        return !result.isEmpty();
     }
 
     @Transactional

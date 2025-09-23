@@ -32,13 +32,15 @@ public class SendService {
         for (Device target : targets) {
             String platform = target.getPlatform();
             NotificationSender notificationSender = notificationSenders.get(platform);
-            if (notificationSender != null) {
-                boolean isSuccess = notificationSender.send(target.getToken(), pushNotificationDto);
-                if(isSuccess) {
-                    report.addSuccess();
-                } else{
-                    report.addFailure();
-                }
+            if(notificationSender == null){
+                throw new RuntimeException("can't find sender for platform " + platform);
+            }
+
+            boolean isSuccess = notificationSender.send(target.getToken(), pushNotificationDto);
+            if(isSuccess) {
+                report.addSuccess();
+            } else {
+                report.addFailure();
             }
         }
         return report;

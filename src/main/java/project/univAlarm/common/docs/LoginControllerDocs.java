@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import project.univAlarm.common.ApiResponse;
-import project.univAlarm.user.dto.UserResponseDto;
 
 @Tag(name = "Kakao Login Controller", description = "카카오 로그인 관련 API 입니다.")
 public interface LoginControllerDocs {

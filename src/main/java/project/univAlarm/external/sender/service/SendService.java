@@ -5,9 +5,8 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import project.univAlarm.common.initialization.dto.SimpleNotificationDto;
-import project.univAlarm.notification.domain.Notification;
-import project.univAlarm.device.domain.Device;
-import project.univAlarm.device.repository.DeviceRepository;
+import project.univAlarm.domain.device.domain.Device;
+import project.univAlarm.domain.device.repository.DeviceRepository;
 import project.univAlarm.external.sender.sender.NotificationSender;
 import project.univAlarm.external.sender.dto.PushNotificationDto;
 import project.univAlarm.external.sender.PushNotificationReport;
@@ -32,13 +31,15 @@ public class SendService {
         for (Device target : targets) {
             String platform = target.getPlatform();
             NotificationSender notificationSender = notificationSenders.get(platform);
-            if (notificationSender != null) {
-                boolean isSuccess = notificationSender.send(target.getToken(), pushNotificationDto);
-                if(isSuccess) {
-                    report.addSuccess();
-                } else{
-                    report.addFailure();
-                }
+            if(notificationSender == null){
+                throw new RuntimeException("can't find sender for platform " + platform);
+            }
+
+            boolean isSuccess = notificationSender.send(target.getToken(), pushNotificationDto);
+            if(isSuccess) {
+                report.addSuccess();
+            } else {
+                report.addFailure();
             }
         }
         return report;

@@ -4,11 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import project.univAlarm.subscription.service.SubscriptionService;
-import project.univAlarm.user.domain.User;
+import project.univAlarm.domain.subscription.service.SubscriptionService;
+import project.univAlarm.domain.user.domain.User;
 import project.univAlarm.common.security.enums.Role;
-import project.univAlarm.user.service.LoginService;
-import project.univAlarm.user.dto.UserJoinDto;
+import project.univAlarm.domain.user.service.LoginService;
+import project.univAlarm.domain.user.dto.UserJoinDto;
 
 @Slf4j
 @Component

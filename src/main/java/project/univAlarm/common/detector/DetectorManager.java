@@ -4,12 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,13 +14,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 import project.univAlarm.common.initialization.dto.SimpleNotificationDto;
 import project.univAlarm.external.crawler.CrawledNotificationDto;
-import project.univAlarm.notification.domain.Notification;
 import project.univAlarm.external.sender.sender.DiscordReportSender;
 import project.univAlarm.external.sender.dto.PushNotificationDto;
 import project.univAlarm.external.sender.PushNotificationReport;
-import project.univAlarm.notification.service.NotificationService;
+import project.univAlarm.domain.notification.service.NotificationService;
 import project.univAlarm.external.sender.service.SendService;
-import project.univAlarm.common.utils.DateFormatter;
 import reactor.core.publisher.Mono;
 
 @Slf4j

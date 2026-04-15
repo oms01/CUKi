@@ -9,7 +9,7 @@ univ-config:
             - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=20&srSearchKey=&srSearchVal=
               name: 일반
               department: false
-            - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=21&srSearchKey=&srSearchVal=
+            - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=21&articleLimit=10000
               name: 학사
               department: false
             - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=22&srSearchKey=&srSearchVal=
@@ -18,109 +18,105 @@ univ-config:
             - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=23&srSearchKey=&srSearchVal=
               name: 취창업
               department: false
-            - url: https://chemistry.catholic.ac.kr/chemistry/community/notice.do
+            - url: https://chemistry.catholic.ac.kr/chemistry/community/notice.do?mode=list&&articleLimit=10000
               name: 화학과
-            - url: https://math.catholic.ac.kr/math/community/notice.do
+            - url: https://math.catholic.ac.kr/math/community/notice.do?mode=list&&articleLimit=10000
               name: 수학과
-            - url: https://physics.catholic.ac.kr/physics/community/notice.do
+            - url: https://physics.catholic.ac.kr/physics/community/notice.do?mode=list&&articleLimit=10000
               name: 물리학과
-            - url: https://design.catholic.ac.kr/design/community/notice.do
+            - url: https://design.catholic.ac.kr/design/community/notice.do?mode=list&&articleLimit=10000
               name: 공간디자인소비학과
-            - url: https://clothing.catholic.ac.kr/clothing/community/notice.do
+            - url: https://clothing.catholic.ac.kr/clothing/community/notice.do?mode=list&&articleLimit=10000
               name: 의류학과
-            - url: https://fn.catholic.ac.kr/fn/community/notice.do
+            - url: https://fn.catholic.ac.kr/fn/community/notice.do?mode=list&&articleLimit=10000
               name: 식품영양학과
-            - url: https://csie.catholic.ac.kr/csie/community/notice.do
+            - url: https://csie.catholic.ac.kr/csie/community/notice.do?mode=list&&articleLimit=10000
               name: 컴퓨터정보공학부
-            - url: https://mtc.catholic.ac.kr/mtc/community/notice.do
+            - url: https://mtc.catholic.ac.kr/mtc/community/notice.do?mode=list&&articleLimit=10000
               name: 미디어기술콘텐츠학과
-            - url: https://ice.catholic.ac.kr/ice/community/notice.do
+            - url: https://ice.catholic.ac.kr/ice/community/notice.do?mode=list&&articleLimit=10000
               name: 정보통신전자공학부
-            - url: https://biotech.catholic.ac.kr/biotech/community/notice.do
+            - url: https://biotech.catholic.ac.kr/biotech/community/notice.do?mode=list&&articleLimit=10000
               name: 생명공학과
-            - url: https://envi.catholic.ac.kr/envi/community/notice.do
+            - url: https://envi.catholic.ac.kr/envi/community/notice.do?mode=list&&articleLimit=10000
               name: 에너지환경공학과
-            - url: https://bmce.catholic.ac.kr/bmce/community/notice.do
+            - url: https://bmce.catholic.ac.kr/bmce/community/notice.do?mode=list&&articleLimit=10000
               name: 바이오메디컬화학공학과
-            - url: https://ai.catholic.ac.kr/ai/community/notice.do
+            - url: https://ai.catholic.ac.kr/ai/community/notice.do?mode=list&&articleLimit=10000
               name: 인공지능학과
-            - url: https://datascience.catholic.ac.kr/datascience/community/notice.do
+            - url: https://datascience.catholic.ac.kr/datascience/community/notice.do?mode=list&&articleLimit=10000
               name: 데이터사이언스학과
-            - url: https://bmsw.catholic.ac.kr/bmsw/community/notice.do
+            - url: https://bmsw.catholic.ac.kr/bmsw/community/notice.do?mode=list&&articleLimit=10000
               name: 바이오메디컬소프트웨어학과
-            - url: https://mbs.catholic.ac.kr/mbs/community/notice.do
+            - url: https://mbs.catholic.ac.kr/mbs/community/notice.do?mode=list&&articleLimit=10000
               name: 의생명과학과
-            - url: https://korean.catholic.ac.kr/korean/community/notice.do
+            - url: https://korean.catholic.ac.kr/korean/community/notice.do?mode=list&&articleLimit=10000
               name: 국어국문학과
-            - url: https://philosophy.catholic.ac.kr/philosophy/community/notice.do
+            - url: https://philosophy.catholic.ac.kr/philosophy/community/notice.do?mode=list&&articleLimit=10000
               name: 철학과
-            - url: https://koreanhistory.catholic.ac.kr/koreanhistory/community/notice.do
+            - url: https://koreanhistory.catholic.ac.kr/koreanhistory/community/notice.do?mode=list&&articleLimit=10000
               name: 국사학과
-            - url: https://english.catholic.ac.kr/english/community/notice.do
+            - url: https://english.catholic.ac.kr/english/community/notice.do?mode=list&&articleLimit=10000
               name: 영어영문학부
-            - url: https://cn.catholic.ac.kr/cn/community/notice.do
+            - url: https://cn.catholic.ac.kr/cn/community/notice.do?mode=list&&articleLimit=10000
               name: 중국언어문화학과
-            - url: https://japanese.catholic.ac.kr/japanese/major/notice.do
+            - url: https://japanese.catholic.ac.kr/japanese/major/notice.do?mode=list&&articleLimit=10000
               name: 일어일본문화학과
-            - url: https://french.catholic.ac.kr/french/community/notice.do
+            - url: https://french.catholic.ac.kr/french/community/notice.do?mode=list&&articleLimit=10000
               name: 프랑스어문화학과
-            - url: https://socialwelfare.catholic.ac.kr/socialwelfare/community/notice.do
+            - url: https://socialwelfare.catholic.ac.kr/socialwelfare/community/notice.do?mode=list&&articleLimit=10000
               name: 사회복지학과
-            - url: https://psychology.catholic.ac.kr/psychology/community/notice.do
+            - url: https://psychology.catholic.ac.kr/psychology/community/notice.do?mode=list&&articleLimit=10000
               name: 심리학과
-            - url: https://sociology.catholic.ac.kr/sociology/community/notice.do
+            - url: https://sociology.catholic.ac.kr/sociology/community/notice.do?mode=list&&articleLimit=10000
               name: 사회학과
-            - url: https://children.catholic.ac.kr/children/community/notice.do
+            - url: https://children.catholic.ac.kr/children/community/notice.do?mode=list&&articleLimit=10000
               name: 아동학과
-            - url: https://sped.catholic.ac.kr/sped/community/notice.do
+            - url: https://sped.catholic.ac.kr/sped/community/notice.do?mode=list&&articleLimit=10000
               name: 특수교육과
-            - url: https://business.catholic.ac.kr/business/community/notice.do
+            - url: https://business.catholic.ac.kr/business/community/notice.do?mode=list&&articleLimit=10000
               name: 경영학과
-            - url: https://accounting.catholic.ac.kr/accounting/community/notice.do
+            - url: https://accounting.catholic.ac.kr/accounting/community/notice.do?mode=list&&articleLimit=10000
               name: 회계학과
-            - url: https://is.catholic.ac.kr/is/community/notice.do
+            - url: https://is.catholic.ac.kr/is/community/notice.do?mode=list&&articleLimit=10000
               name: 국제학부
-            - url: https://law.catholic.ac.kr/law/community/notice.do
+            - url: https://law.catholic.ac.kr/law/community/notice.do?mode=list&&articleLimit=10000
               name: 법학과
-            - url: https://economics.catholic.ac.kr/economics/community/notice.do
+            - url: https://economics.catholic.ac.kr/economics/community/notice.do?mode=list&&articleLimit=10000
               name: 경제학과
-            - url: https://pa.catholic.ac.kr/pa/community/notice.do
+            - url: https://pa.catholic.ac.kr/pa/community/notice.do?mode=list&&articleLimit=10000
               name: 행정학과
-            - url: https://globalbiz.catholic.ac.kr/globalbiz/community/notice.do
+            - url: https://globalbiz.catholic.ac.kr/globalbiz/community/notice.do?mode=list&&articleLimit=10000
               name: 글로벌경영학과
-            - url: https://klc.catholic.ac.kr/klc/community/notice.do
+            - url: https://klc.catholic.ac.kr/klc/community/notice.do?mode=list&&articleLimit=10000
               name: 한국어문화학과
-            - url: https://music.catholic.ac.kr/music/community/notice.do
+            - url: https://music.catholic.ac.kr/music/community/notice.do?mode=list&&articleLimit=10000
               name: 음악과
-            - url: https://voice.catholic.ac.kr/voice/community/notice.do
+            - url: https://voice.catholic.ac.kr/voice/community/notice.do?mode=list&&articleLimit=10000
               name: 성악과
-            - url: https://liberal.catholic.ac.kr/liberal/community/notice.do
+            - url: https://liberal.catholic.ac.kr/liberal/community/notice.do?mode=list&&articleLimit=10000
               name: 자유전공학부
-            - url: https://catholic-college.catholic.ac.kr/catholic_college/notification/notice.do
+            - url: https://catholic-college.catholic.ac.kr/catholic_college/notification/notice.do?mode=list&&articleLimit=10000
               name: 학부대학
-            - url: https://major-convergence.catholic.ac.kr/major_convergence/notice/notice.do
+            - url: https://major-convergence.catholic.ac.kr/major_convergence/notice/notice.do?mode=list&&articleLimit=10000
               name: 융합전공학부
-            - url: https://teaching.catholic.ac.kr/teaching/community/notice.do
+            - url: https://teaching.catholic.ac.kr/teaching/community/notice.do?mode=list&&articleLimit=10000
               name: 교직과
-            - url: https://gbs.catholic.ac.kr/gbs/community/notice.do
+            - url: https://gbs.catholic.ac.kr/gbs/community/notice.do?mode=list&&articleLimit=10000
               name: 글로벌경영대학
-            - url: https://pharmacy.catholic.ac.kr/pharmacy/community/notice.do
+            - url: https://pharmacy.catholic.ac.kr/pharmacy/community/notice.do?mode=list&&articleLimit=10000
               name: 약학과
         - name: 성신교정
-          url: https://songsin.catholic.ac.kr/ko/index.do
+          url: https://songsin.catholic.ac.kr/ko/index.do?mode=list&&articleLimit=10000
           default-crawler: catholicUnivDefaultCrawler
           urls:
-            - url: https://songsin.catholic.ac.kr/ko/songsin-community/notice.do?mode=list&&articleLimit=10&article.offset=0
+            - url: https://songsin.catholic.ac.kr/ko/songsin-community/notice.do?mode=list&&articleLimit=10000
               name: 신학과
-        - name: 성의교정 - 의과대학
-          url: https://medicine.catholic.ac.kr/index.jsp
-          default-crawler: catholicUnivMedicineCrawler
+        - name: 성의교정
+          url: https://songeui.catholic.ac.kr/ko/index.do
+          default-crawler: catholicUnivDefaultCrawler
           urls:
-            - url: https://medicine.catholic.ac.kr/bbs/notice/noticelist.jsp
+            - url: https://songeui.catholic.ac.kr/medicine/community/notice.do?mode=list&&articleLimit=10000
               name: 의학과
-        - name: 성의교정 - 간호대학
-          url: https://nursing.catholic.ac.kr/index.jsp
-          default-crawler: catholicUnivNursingCrawler
-          urls:
-            - url: https://nursing.catholic.ac.kr/bbs/notice/noticelist.jsp
+            - url: https://songeui.catholic.ac.kr/nursing/community/notice.do?mode=list&&articleLimit=10000
               name: 간호학과

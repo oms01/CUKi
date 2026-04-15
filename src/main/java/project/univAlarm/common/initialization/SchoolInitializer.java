@@ -1,27 +1,16 @@
 package project.univAlarm.common.initialization;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.univAlarm.common.config.UnivConfigProperties;
 import project.univAlarm.common.config.UnivConfigProperties.UnivConfig;
 import project.univAlarm.common.config.UnivConfigProperties.UnivConfig.Campus;
-import project.univAlarm.common.config.UnivConfigProperties.UnivConfig.Campus.UrlEntry;
-import project.univAlarm.common.initialization.dto.SimpleNotificationTypeDto;
 import project.univAlarm.common.initialization.dto.SimpleSchoolDto;
-import project.univAlarm.school.repository.SchoolRepository;
-import project.univAlarm.school.service.SchoolService;
+import project.univAlarm.domain.school.service.SchoolService;
 
 @Component
 @RequiredArgsConstructor

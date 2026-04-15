@@ -8,12 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import project.univAlarm.common.initialization.dto.SimpleNotificationTypeDto;
-import project.univAlarm.common.initialization.dto.SimpleSchoolDto;
 import project.univAlarm.external.crawler.CrawledNotificationDto;
 import project.univAlarm.external.crawler.catholicUniv.Crawler;
-import project.univAlarm.notificationType.domain.NotificationType;
-import project.univAlarm.school.domain.School;
-import project.univAlarm.school.dto.SchoolResponseDto;
 
 @Slf4j
 @Getter @Setter
@@ -27,7 +23,11 @@ public class NotificationDetector {
     private List<CrawledNotificationDto> notificationList = new ArrayList<>();
 
     public List<CrawledNotificationDto> initializeDetector() throws IOException {
-        notificationList = crawler.crawl(baseurl);
+        try{
+            notificationList = crawler.crawl(baseurl);
+        } catch (Exception e){
+            System.out.println("Crawling failed" + baseurl);
+        }
         return notificationList;
     }
 
@@ -36,15 +36,18 @@ public class NotificationDetector {
      *  + notificationList 갱신
      */
     public List<CrawledNotificationDto> runDetector() throws IOException {
-        List<CrawledNotificationDto> crawledNotificationDtos = crawler.crawl(baseurl);
+        try {
+            List<CrawledNotificationDto> crawledNotificationDtos = crawler.crawl(baseurl);
+            List<CrawledNotificationDto> detectedNotifications = new ArrayList<>();
+            crawledNotificationDtos.stream()
+                    .filter(crawledNotificationDto -> !notificationList.contains(crawledNotificationDto))
+                    .forEach(detectedNotifications::add);
 
-        List<CrawledNotificationDto> detectedNotifications = new ArrayList<>();
-        crawledNotificationDtos.stream()
-                .filter(crawledNotificationDto -> !notificationList.contains(crawledNotificationDto))
-                .forEach(detectedNotifications::add);
-
-        notificationList = crawledNotificationDtos;
-
-        return detectedNotifications;
+            notificationList = crawledNotificationDtos;
+            return detectedNotifications;
+        } catch (Exception e) {
+            System.out.println(baseurl);
+        }
+        return new ArrayList<CrawledNotificationDto>();
     }
 }

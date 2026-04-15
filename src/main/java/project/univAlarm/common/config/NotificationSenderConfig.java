@@ -15,7 +15,7 @@ public class NotificationSenderConfig {
 
         // sender 추가될 때 마다 아래에 추가하기
         FcmNotificationSender fcmNotificationSender = new FcmNotificationSender();
-        notificationSenderMap.put(fcmNotificationSender.getClass().getSimpleName(), fcmNotificationSender);
+        notificationSenderMap.put("Android", fcmNotificationSender);
 
         return notificationSenderMap;
     }

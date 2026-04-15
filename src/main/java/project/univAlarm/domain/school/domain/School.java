@@ -1,0 +1,44 @@
+package project.univAlarm.domain.school.domain;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import project.univAlarm.domain.notificationType.domain.NotificationType;
+
+@Entity
+@Table(name = "schools")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class School {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String campus;
+
+    @CreationTimestamp
+    @Column(name = "created_at")
+    @JsonIgnore
+    private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<NotificationType> notificationTypes = new ArrayList<>();
+
+    public School(String name, String campus) {
+        this.name = name;
+        this.campus = campus;
+    }
+}

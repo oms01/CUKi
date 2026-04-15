@@ -12,7 +12,6 @@ import project.univAlarm.common.config.UnivConfigProperties.UnivConfig.Campus;
 import project.univAlarm.common.config.UnivConfigProperties.UnivConfig.Campus.UrlEntry;
 import project.univAlarm.external.crawler.catholicUniv.Crawler;
 import project.univAlarm.common.detector.NotificationDetector;
-import project.univAlarm.school.dto.SchoolResponseDto;
 
 @Configuration
 @RequiredArgsConstructor

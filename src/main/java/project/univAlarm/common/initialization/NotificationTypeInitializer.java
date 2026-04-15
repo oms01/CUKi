@@ -1,19 +1,10 @@
 package project.univAlarm.common.initialization;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import project.univAlarm.common.config.UnivConfigProperties;
 import project.univAlarm.common.config.UnivConfigProperties.UnivConfig;
@@ -21,7 +12,7 @@ import project.univAlarm.common.config.UnivConfigProperties.UnivConfig.Campus;
 import project.univAlarm.common.config.UnivConfigProperties.UnivConfig.Campus.UrlEntry;
 import project.univAlarm.common.initialization.dto.SimpleNotificationTypeDto;
 import project.univAlarm.common.initialization.dto.SimpleSchoolDto;
-import project.univAlarm.notificationType.service.NotificationTypeService;
+import project.univAlarm.domain.notificationType.service.NotificationTypeService;
 
 @Slf4j
 @Component

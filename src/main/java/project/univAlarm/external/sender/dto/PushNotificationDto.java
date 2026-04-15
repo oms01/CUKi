@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import project.univAlarm.common.initialization.dto.SimpleNotificationDto;
-import project.univAlarm.notification.domain.Notification;
+import project.univAlarm.domain.notification.domain.Notification;
 
 @Getter @Setter
 @NoArgsConstructor

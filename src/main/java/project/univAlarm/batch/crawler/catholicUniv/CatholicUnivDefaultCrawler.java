@@ -14,7 +14,7 @@ import project.univAlarm.batch.crawler.Crawler;
 public class CatholicUnivDefaultCrawler implements Crawler {
     @Override
     public ArrayList<CrawledNotificationDto> crawl(String baseUrl) throws IOException {
-        Document doc = Jsoup.connect(baseUrl).timeout(10000).get();
+        Document doc = Jsoup.connect(baseUrl).timeout(30000).get();
 
         Elements rows = doc.select("tbody tr");
         ArrayList<CrawledNotificationDto> notifications = new ArrayList<>();
@@ -38,7 +38,7 @@ public class CatholicUnivDefaultCrawler implements Crawler {
         int len = tds.size();
 
         Long id = Long.parseLong(tds.get(0).text());
-        String title = link.text();
+        String title = link.text().substring(0, Math.min(250, link.text().length()));
         String href = link.attr("href");
         String date = tds.get(len-3).text();
         String writer = tds.get(len-2).text();

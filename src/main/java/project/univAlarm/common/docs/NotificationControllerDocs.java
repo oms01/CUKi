@@ -26,4 +26,11 @@ public interface NotificationControllerDocs {
             @RequestParam String keyword,
             @RequestParam(defaultValue = "0") int page
     );
+
+    @CustomOperation(summary = "공지사항 검색하기 V2 (Full Text Search)")
+    @GetMapping("/search/v2")
+    public ResponseEntity<ApiResponse<List<NotificationResponseDto>>> searchNotificationsV2(
+            @RequestParam String keyword,
+            @RequestParam(defaultValue = "0") int page
+    );
 }

@@ -54,4 +54,28 @@ class NotificationServiceTest {
         assertThat(results).isNotEmpty();
         assertThat(results.get(0).getTitle()).isEqualTo("테스트 공지입니다.");
     }
+
+    @Test
+    void searchNotificationsV2Test() {
+        // Given
+        String keyword = "공지";
+        int page = 0;
+        String processedKeyword = "+공지";
+
+        School school = new School("가톨릭대학교", "성심");
+        NotificationType type = new NotificationType(school, "공지", false, "http://url.com");
+        CrawledNotificationDto crawledDto = new CrawledNotificationDto(1L, "테스트 공지입니다.", "2024-04-16", "작성자", "http://test.com");
+        Notification notification = new Notification(type, crawledDto);
+        ReflectionTestUtils.setField(notification, "id", 1L);
+
+        when(notificationRepository.searchByFullText(eq(processedKeyword), any(Pageable.class)))
+                .thenReturn(List.of(notification));
+
+        // When
+        List<NotificationResponseDto> results = notificationService.searchNotificationsV2(keyword, page);
+
+        // Then
+        assertThat(results).isNotEmpty();
+        assertThat(results.get(0).getTitle()).isEqualTo("테스트 공지입니다.");
+    }
 }

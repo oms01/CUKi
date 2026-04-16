@@ -32,4 +32,13 @@ public class NotificationController implements NotificationControllerDocs {
 
         return ApiResponse.ok(notificationList);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse<List<NotificationResponseDto>>> searchNotifications(
+            @RequestParam String keyword,
+            @RequestParam(defaultValue = "0") int page
+    ) {
+        List<NotificationResponseDto> notificationList = notificationService.searchNotifications(keyword, page);
+        return ApiResponse.ok(notificationList);
+    }
 }

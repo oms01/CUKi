@@ -42,6 +42,15 @@ public class NotificationService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
+    public List<NotificationResponseDto> searchNotifications(String keyword, int page) {
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
+        List<Notification> notifications = notificationRepository.findByTitleContaining(keyword, pageable);
+        return notifications.stream()
+                .map(NotificationResponseDto::new)
+                .toList();
+    }
+
     public boolean isExist(Long notificationTypeId, Long notificationOriginId) {
         String sql = "SELECT 1 FROM notifications WHERE notification_type_id = ? AND origin_id = ? LIMIT 1";
         List<Integer> result = jdbcTemplate.queryForList(sql, Integer.class, notificationTypeId, notificationOriginId);

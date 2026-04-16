@@ -19,4 +19,11 @@ public interface NotificationControllerDocs {
             @AuthenticationPrincipal CustomUserDetails userDetails,
             @RequestParam(defaultValue="0") int page
     );
+
+    @CustomOperation(summary = "공지사항 검색하기")
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse<List<NotificationResponseDto>>> searchNotifications(
+            @RequestParam String keyword,
+            @RequestParam(defaultValue = "0") int page
+    );
 }

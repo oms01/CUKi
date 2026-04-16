@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import project.univAlarm.common.ApiResponse;
 import project.univAlarm.common.security.jwt.dto.CustomUserDetails;
-import project.univAlarm.domain.user.dto.UserResponseDto;
+import project.univAlarm.entity.user.dto.UserResponseDto;
 
 @Tag(name = "User Controller", description = "사용자 정보 관련 API 입니다.")
 public interface UserControllerDocs {

@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import project.univAlarm.common.detector.NotificationDetector;
-import project.univAlarm.external.crawler.CrawledNotificationDto;
+import project.univAlarm.batch.detector.NotificationDetector;
+import project.univAlarm.batch.crawler.CrawledNotificationDto;
 
 @SpringBootTest
 class NotificationDetectorTest {

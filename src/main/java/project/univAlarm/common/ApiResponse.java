@@ -20,6 +20,16 @@ public class ApiResponse<T> {
 
     private static final Long REFRESH_TOKEN_EXPIRATION_MS = 30 * 24 * 60 * 60 * 1000L;
 
+    public static <T> ResponseEntity<ApiResponse<T>> ok() {
+        return ResponseEntity.ok(
+                ApiResponse.<T>builder()
+                        .status(HttpStatus.OK.value())
+                        .message("success")
+                        .data(null)
+                        .build()
+        );
+    }
+
     public static <T> ResponseEntity<ApiResponse<T>> ok(T data) {
         return ResponseEntity.ok(
                 ApiResponse.<T>builder()

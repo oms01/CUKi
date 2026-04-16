@@ -1,18 +1,15 @@
 package project.univAlarm.common.initialization;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import project.univAlarm.common.detector.DetectorManager;
-import project.univAlarm.common.initialization.dto.SimpleNotificationDto;
-import project.univAlarm.common.initialization.dto.SimpleNotificationTypeDto;
-import project.univAlarm.common.initialization.dto.SimpleSchoolDto;
+import project.univAlarm.batch.initialization.domainInitializer.*;
+import project.univAlarm.batch.initialization.dto.SimpleNotificationDto;
+import project.univAlarm.batch.initialization.dto.SimpleNotificationTypeDto;
+import project.univAlarm.batch.initialization.dto.SimpleSchoolDto;
 
 @SpringBootTest
 class DataInitializationRunnerTest {

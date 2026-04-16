@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import project.univAlarm.common.ApiResponse;
-import project.univAlarm.domain.subscription.dto.CreateSubscriptionRequestDto;
-import project.univAlarm.domain.subscription.dto.DeleteSubscriptionRequestDto;
+import project.univAlarm.entity.subscription.dto.CreateSubscriptionRequestDto;
+import project.univAlarm.entity.subscription.dto.DeleteSubscriptionRequestDto;
 import project.univAlarm.common.security.jwt.dto.CustomUserDetails;
-import project.univAlarm.domain.user.dto.UserSubscriptionResponseDto;
+import project.univAlarm.entity.user.dto.UserSubscriptionResponseDto;
 
 @Tag(name = "Subscription Controller", description = "사용자 구독 관련 API 입니다.")
 public interface SubscriptionControllerDocs {

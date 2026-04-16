@@ -6,16 +6,16 @@ univ-config:
           url: https://www.catholic.ac.kr/ko/index.do
           default-crawler: catholicUnivDefaultCrawler
           urls:
-            - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=20&srSearchKey=&srSearchVal=
+            - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=20&articleLimit=10000
               name: 일반
               department: false
             - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=21&articleLimit=10000
               name: 학사
               department: false
-            - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=22&srSearchKey=&srSearchVal=
+            - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=22&articleLimit=10000
               name: 장학
               department: false
-            - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=23&srSearchKey=&srSearchVal=
+            - url: https://www.catholic.ac.kr/ko/campuslife/notice.do?mode=list&srCategoryId=23&articleLimit=10000
               name: 취창업
               department: false
             - url: https://chemistry.catholic.ac.kr/chemistry/community/notice.do?mode=list&&articleLimit=10000
@@ -116,7 +116,7 @@ univ-config:
           url: https://songeui.catholic.ac.kr/ko/index.do
           default-crawler: catholicUnivDefaultCrawler
           urls:
-            - url: https://songeui.catholic.ac.kr/medicine/community/notice.do?mode=list&&articleLimit=10000
+            - url: https://songeui.catholic.ac.kr/medicine/community/notice.do?mode=list&&articleLimit=999
               name: 의학과
-            - url: https://songeui.catholic.ac.kr/nursing/community/notice.do?mode=list&&articleLimit=10000
+            - url: https://songeui.catholic.ac.kr/nursing/community/notice.do?mode=list&&articleLimit=999
               name: 간호학과

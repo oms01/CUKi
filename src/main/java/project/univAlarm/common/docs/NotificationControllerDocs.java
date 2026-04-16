@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import project.univAlarm.common.ApiResponse;
 import project.univAlarm.common.security.jwt.dto.CustomUserDetails;
-import project.univAlarm.domain.notification.dto.NotificationResponseDto;
+import project.univAlarm.entity.notification.dto.NotificationResponseDto;
 
 @Tag(name = "Notification Controller", description = "사용자가 구독한 공지사항 관련 API 입니다.")
 public interface NotificationControllerDocs {

@@ -14,7 +14,7 @@ import project.univAlarm.batch.crawler.Crawler;
 public class CatholicUnivMedicineCrawler implements Crawler {
     @Override
     public ArrayList<CrawledNotificationDto> crawl(String baseUrl) throws IOException {
-        Document doc = Jsoup.connect(baseUrl).timeout(100000).get();
+        Document doc = Jsoup.connect(baseUrl).timeout(10000).get();
         Elements rows = doc.select("div.list01 table tbody tr");
         ArrayList<CrawledNotificationDto> notifications = new ArrayList<>();
 

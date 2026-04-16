@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import project.univAlarm.batch.detector.DetectorManager;
 import project.univAlarm.batch.initialization.*;
+import project.univAlarm.batch.initialization.domainInitializer.*;
 import project.univAlarm.batch.initialization.dto.SimpleNotificationDto;
 import project.univAlarm.batch.initialization.dto.SimpleNotificationTypeDto;
 import project.univAlarm.batch.initialization.dto.SimpleSchoolDto;

@@ -1,4 +1,4 @@
-package project.univAlarm.batch.initialization;
+package project.univAlarm.batch.initialization.domainInitializer;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import project.univAlarm.batch.initialization.DetectorInitializer;
+import project.univAlarm.batch.initialization.domainInitializer.DetectorInitializer;
 import project.univAlarm.batch.initialization.dto.SimpleNotificationDto;
 
 @SpringBootTest

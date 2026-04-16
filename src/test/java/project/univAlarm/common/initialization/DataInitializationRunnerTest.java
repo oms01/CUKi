@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import project.univAlarm.batch.initialization.*;
+import project.univAlarm.batch.initialization.domainInitializer.*;
 import project.univAlarm.batch.initialization.dto.SimpleNotificationDto;
 import project.univAlarm.batch.initialization.dto.SimpleNotificationTypeDto;
 import project.univAlarm.batch.initialization.dto.SimpleSchoolDto;

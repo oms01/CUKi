@@ -1,4 +1,4 @@
-package project.univAlarm.batch.initialization;
+package project.univAlarm.batch.initialization.domainInitializer;
 
 import java.util.ArrayList;
 import java.util.List;

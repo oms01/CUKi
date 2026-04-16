@@ -22,23 +22,8 @@ public class DataInitializationRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-//
-//        Map<String, SimpleSchoolDto> schoolIds = schoolInitializer.init(); // 학교명:교정명 -> 학교정보
-//        Map<String, SimpleNotificationTypeDto> notificationTypeIds = notificationTypeInitializer.init(schoolIds); //url -> 공지 종류
-//        detectorPropertiesInitializer.init(notificationTypeIds);
-//        log.info("[{}] Detector Properties Initializing Complete", DateFormatter.currentTimeFormatted());
-//
-//        long st = System.currentTimeMillis();
-//        List<SimpleNotificationDto> simpleNotificationDtos = detectorInitializer.init();
-//        long en = System.currentTimeMillis();
-//        log.info("[{}] Detector Initializing Complete {}ms", DateFormatter.currentTimeFormatted(), en - st);
-//        notificationInitializer.init(simpleNotificationDtos);
-//        log.info("[{}] Notification Data Initializing Complete", DateFormatter.currentTimeFormatted());
-
         adminAccountInitializer.init();
         log.info("[{}] Admin Account Initializing Complete", DateFormatter.currentTimeFormatted());
 
-//        log.info("[{}] DetectorManager start running", DateFormatter.currentTimeFormatted());
-//        detectorManager.startScheduledTask();
     }
 }

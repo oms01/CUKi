@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import project.univAlarm.common.ApiResponse;
-import project.univAlarm.domain.notificationType.domain.NotificationType.NotificationTypeResponseDto;
-import project.univAlarm.domain.school.dto.SchoolResponseDto;
+import project.univAlarm.entity.notificationType.domain.NotificationType.NotificationTypeResponseDto;
+import project.univAlarm.entity.school.dto.SchoolResponseDto;
 
 @Tag(name = "School Controller", description = "서비스 중인 학교/공지사항 타입 관련 API 입니다.")
 public interface SchoolControllerDocs {

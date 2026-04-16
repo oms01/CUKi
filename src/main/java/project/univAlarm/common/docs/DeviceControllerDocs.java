@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import project.univAlarm.common.ApiResponse;
-import project.univAlarm.domain.device.dto.DeleteDeviceRequestDto;
-import project.univAlarm.domain.device.dto.DeviceRequestDto;
-import project.univAlarm.domain.device.dto.UpdateDeviceRequestDto;
+import project.univAlarm.entity.device.dto.DeleteDeviceRequestDto;
+import project.univAlarm.entity.device.dto.DeviceRequestDto;
+import project.univAlarm.entity.device.dto.UpdateDeviceRequestDto;
 import project.univAlarm.common.security.jwt.dto.CustomUserDetails;
-import project.univAlarm.domain.device.dto.DeviceResponseDto;
+import project.univAlarm.entity.device.dto.DeviceResponseDto;
 
 @Tag(name = "Device Controller", description = "사용자 장치와 관련된 API 입니다.")
 public interface DeviceControllerDocs {

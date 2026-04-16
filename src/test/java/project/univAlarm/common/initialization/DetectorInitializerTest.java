@@ -1,17 +1,13 @@
 package project.univAlarm.common.initialization;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import project.univAlarm.common.detector.NotificationDetector;
-import project.univAlarm.common.initialization.dto.SimpleNotificationDto;
-import project.univAlarm.common.initialization.dto.SimpleNotificationTypeDto;
-import project.univAlarm.common.initialization.dto.SimpleSchoolDto;
+import project.univAlarm.batch.initialization.DetectorInitializer;
+import project.univAlarm.batch.initialization.dto.SimpleNotificationDto;
 
 @SpringBootTest
 class DetectorInitializerTest {

@@ -1,0 +1,6 @@
+spring:
+  config:
+    import:
+      - classpath:/universityConfig/CatholicUnivConfig.yaml
+      - classpath:config/mysql.yaml
+      - classpath:config/env.yaml

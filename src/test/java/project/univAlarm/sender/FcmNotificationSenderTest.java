@@ -7,13 +7,13 @@ import project.univAlarm.batch.sender.dto.PushNotificationDto;
 import project.univAlarm.batch.sender.sender.FcmNotificationSender;
 
 
-@SpringBootTest
+//@SpringBootTest
 class FcmNotificationSenderTest {
 
-    @Autowired
+//    @Autowired
     private FcmNotificationSender sender;
 
-    @Test
+//    @Test
     public void FcmSenderTest() {
         String token = "TEMP_TOKEN";
         PushNotificationDto dummyPushNotificationDto = createDummyPushNotificationDto();

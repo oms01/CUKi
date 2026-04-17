@@ -1,6 +1,8 @@
 spring:
   application:
     name: univAlarm
+  profiles:
+    active: ${SPRING_PROFILE:dev}
   config:
     import:
       - classpath:/universityConfig/CatholicUnivConfig.yaml

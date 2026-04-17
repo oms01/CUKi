@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d # 방금 만든 nginx 폴더를 컨테이너 안으로 연결
+    networks:
+      - app-network
+    restart: always
+
+  backend-blue:
+    image: ${DOCKER_USERNAME}/${PROJECT_NAME}:${APP_VERSION}
+    container_name: backend-blue
+    environment:
+      - TZ=Asia/Seoul
+    env_file:
+      - .env
+    networks:
+      - app-network
+
+  backend-green:
+    image: ${DOCKER_USERNAME}/${PROJECT_NAME}:${APP_VERSION}
+    container_name: backend-green
+    environment:
+      - TZ=Asia/Seoul
+    env_file:
+      - .env
+    networks:
+      - app-network
+
+  redis:
+    image: redis:7.4-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - backend-network
+    command: [ "redis-server", "--appendonly", "yes" ]
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      retries: 5
+
+volumes:
+  redis-data:
+
+networks:
+  app-network:
+    driver: bridge

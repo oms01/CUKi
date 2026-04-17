@@ -42,6 +42,34 @@ public class NotificationService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
+    public List<NotificationResponseDto> searchNotifications(String keyword, int page) {
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
+        List<Notification> notifications = notificationRepository.findByTitleContaining(keyword, pageable);
+        return notifications.stream()
+                .map(NotificationResponseDto::new)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<NotificationResponseDto> searchNotificationsV2(String keyword, int page) {
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
+        
+        // Full Text Search typically works better with tokens.
+        // For simplicity, we can wrap words with '+' for mandatory matching in Boolean Mode if needed,
+        // but here we'll pass the keyword as is, or with simple processing.
+        String processedKeyword = keyword.trim();
+        if (!processedKeyword.isEmpty()) {
+            // Simple logic: if multiple words, ensure they all match
+            processedKeyword = "+" + processedKeyword.replace(" ", " +");
+        }
+
+        List<Notification> notifications = notificationRepository.searchByFullText(processedKeyword, pageable);
+        return notifications.stream()
+                .map(NotificationResponseDto::new)
+                .toList();
+    }
+
     public boolean isExist(Long notificationTypeId, Long notificationOriginId) {
         String sql = "SELECT 1 FROM notifications WHERE notification_type_id = ? AND origin_id = ? LIMIT 1";
         List<Integer> result = jdbcTemplate.queryForList(sql, Integer.class, notificationTypeId, notificationOriginId);

@@ -7,7 +7,11 @@ spring:
 #      - classpath:config/h2.yaml
       - classpath:config/mysql.yaml
       - classpath:config/env.yaml
+  sql:
+    init:
+      mode: always
   jpa:
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create
     properties:

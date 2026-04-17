@@ -88,5 +88,24 @@ jobs:
           script_stop: true
           script: |
             cd app
-            chmod +x deploy.sh
-            ./deploy.sh
+            
+            # 1. Redis는 백그라운드에서 항상 실행되도록 보장 (이미 켜져있으면 무시됨)
+            docker-compose -f docker-compose.prod.yml up -d redis
+            
+            # 2. Nginx 컨테이너가 존재하는지 확인하여 최초 배포 여부 판단
+            IS_NGINX_EXIST=$(docker ps -a -q -f name=nginx)
+            
+            if [ -z "$IS_NGINX_EXIST" ]; then
+              echo "🚀 최초 배포를 감지했습니다. 초기 인프라 세팅을 시작합니다."
+            
+              # 주의: Nginx를 먼저 띄우면 백엔드가 없어서 Nginx가 에러를 뿜고 죽습니다.
+              # 따라서 backend-blue를 먼저 띄우고 Nginx를 띄워야 합니다.
+              docker-compose -f docker-compose.prod.yml up -d backend-blue
+              docker-compose -f docker-compose.prod.yml up -d nginx
+            
+            else
+              echo "🔄 기존 환경이 감지되었습니다. 무중단 배포 스크립트(deploy.sh)를 실행합니다."
+            
+              chmod +x deploy.sh
+              ./deploy.sh
+            fi

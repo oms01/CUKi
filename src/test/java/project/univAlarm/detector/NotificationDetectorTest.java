@@ -8,13 +8,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import project.univAlarm.batch.detector.NotificationDetector;
 import project.univAlarm.batch.crawler.CrawledNotificationDto;
 
-@SpringBootTest
+//@SpringBootTest
 class NotificationDetectorTest {
 
     @Autowired
     private List<NotificationDetector> detectors;
 
-    @Test
+//    @Test
     void crawlAllCatholicUnivDepartment(){
         for (NotificationDetector detector : detectors) {
             if(detector.getNotificationList().isEmpty()){

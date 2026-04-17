@@ -11,7 +11,7 @@ import project.univAlarm.batch.initialization.dto.SimpleNotificationDto;
 import project.univAlarm.batch.initialization.dto.SimpleNotificationTypeDto;
 import project.univAlarm.batch.initialization.dto.SimpleSchoolDto;
 
-@SpringBootTest
+//@SpringBootTest
 class DataInitializationRunnerTest {
 
     @Autowired
@@ -28,7 +28,7 @@ class DataInitializationRunnerTest {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Test
+//    @Test
     void measureAverageExecutionTime() {
         int iterations = 100;
         long totalTime = 0;

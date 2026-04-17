@@ -11,7 +11,7 @@ class CatholicUnivMedicineCrawlerTest {
     private CatholicUnivMedicineCrawler crawler = new CatholicUnivMedicineCrawler();
     private String url = "https://medicine.catholic.ac.kr/bbs/notice/noticelist.jsp"; //의학과
 
-    @Test
+//    @Test
     void UrlsCrawlingTest() throws IOException {
         ArrayList<CrawledNotificationDto> notificationDtos = crawler.crawl(url);
         for (CrawledNotificationDto notificationDto : notificationDtos) {

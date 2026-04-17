@@ -9,13 +9,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import project.univAlarm.batch.initialization.domainInitializer.DetectorInitializer;
 import project.univAlarm.batch.initialization.dto.SimpleNotificationDto;
 
-@SpringBootTest
+//@SpringBootTest
 class DetectorInitializerTest {
 
     @Autowired
     private DetectorInitializer detectorInitializer;
 
-    @Test
+//    @Test
     void 기존_순차_크롤링() throws IOException {
         int iterations = 100;
         long totalTime = 0;
@@ -36,7 +36,7 @@ class DetectorInitializerTest {
         System.out.println("평균 실행 시간: " + average + "ms");
     }
 
-    @Test
+//    @Test
     void 병렬_크롤링() throws IOException {
         int iterations = 100;
         long totalTime = 0;

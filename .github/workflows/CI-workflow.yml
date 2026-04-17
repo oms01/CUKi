@@ -26,3 +26,5 @@ jobs:
         run: |
           chmod +x ./gradlew
           ./gradlew build
+        env:
+          JWT_SECRET: "this-is-a-dummy-secret-key-for-github-actions-test-only"

@@ -21,14 +21,51 @@ import project.univAlarm.entity.school.domain.School;
 import project.univAlarm.batch.crawler.CrawledNotificationDto;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import project.univAlarm.entity.subscription.domain.Subscription;
+import project.univAlarm.entity.subscription.repository.SubscriptionRepository;
+import project.univAlarm.entity.user.domain.User;
+import org.mockito.ArgumentCaptor;
+import static org.mockito.Mockito.verify;
+
 @ExtendWith(MockitoExtension.class)
 class NotificationServiceTest {
 
     @Mock
     private NotificationRepository notificationRepository;
 
+    @Mock
+    private SubscriptionRepository subscriptionRepository;
+
     @InjectMocks
     private NotificationService notificationService;
+
+    @Test
+    void findSubscribedNotificationByUserTest() {
+        // Given
+        Long userId = 1L;
+        int page = 0;
+        User user = User.builder().id(userId).build();
+        School school = new School("가톨릭대학교", "성심");
+        NotificationType type = new NotificationType(school, "공지", false, "http://url.com");
+        Subscription subscription = new Subscription(user, type);
+
+        when(subscriptionRepository.findByUserId(userId)).thenReturn(List.of(subscription));
+        
+        CrawledNotificationDto crawledDto = new CrawledNotificationDto(1L, "테스트 공지입니다.", "2024-04-16", "작성자", "http://test.com");
+        Notification notification = new Notification(type, crawledDto);
+        
+        ArgumentCaptor<Pageable> pageableCaptor = ArgumentCaptor.forClass(Pageable.class);
+        when(notificationRepository.findByNotificationTypeIn(any(), pageableCaptor.capture()))
+                .thenReturn(List.of(notification));
+
+        // When
+        notificationService.findSubscribedNotificationByUser(userId, page);
+
+        // Then
+        Pageable capturedPageable = pageableCaptor.getValue();
+        assertThat(capturedPageable.getSort().getOrderFor("date").getDirection()).isEqualTo(org.springframework.data.domain.Sort.Direction.DESC);
+        assertThat(capturedPageable.getSort().getOrderFor("id").getDirection()).isEqualTo(org.springframework.data.domain.Sort.Direction.DESC);
+    }
 
     @Test
     void searchNotificationsTest() {

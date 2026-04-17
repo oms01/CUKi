@@ -2,7 +2,7 @@ spring:
   application:
     name: univAlarm
   profiles:
-    active: ${SPRING_PROFILE:dev}
+    active: ${SPRING_PROFILE:prod}
   config:
     import:
       - classpath:/universityConfig/CatholicUnivConfig.yaml

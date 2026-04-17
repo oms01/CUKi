@@ -1,0 +1,9 @@
+spring:
+  config:
+    import:
+      - classpath:/universityConfig/CatholicUnivConfig.yaml
+      - classpath:config/h2.yaml
+      - classpath:config/env.yaml
+  sql:
+    init:
+      mode: never

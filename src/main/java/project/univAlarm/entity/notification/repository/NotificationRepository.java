@@ -10,16 +10,38 @@ import project.univAlarm.entity.notification.domain.Notification;
 import project.univAlarm.entity.notificationType.domain.NotificationType;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
-    List<Notification> findByNotificationTypeIn(List<NotificationType> notificationTypes, Pageable pageable);
+    @Query("SELECT n FROM Notification n " +
+            "WHERE n.notificationType IN :notificationTypes " +
+            "AND (:lastDate IS NULL OR n.date < :lastDate OR (n.date = :lastDate AND n.id < :lastId)) " +
+            "ORDER BY n.date DESC, n.id DESC")
+    List<Notification> findByNotificationTypeInCursor(
+            @Param("notificationTypes") List<NotificationType> notificationTypes,
+            @Param("lastDate") String lastDate,
+            @Param("lastId") Long lastId,
+            Pageable pageable);
 
     boolean existsByNotificationTypeIdAndOriginId(Long notificationTypeId, Long originId);
 
     Optional<Notification> findByNotificationTypeId(Long notificationTypeId);
 
-    List<Notification> findByTitleContaining(String title, Pageable pageable);
+    @Query("SELECT n FROM Notification n " +
+            "WHERE n.title LIKE %:title% " +
+            "AND (:lastDate IS NULL OR n.date < :lastDate OR (n.date = :lastDate AND n.id < :lastId)) " +
+            "ORDER BY n.date DESC, n.id DESC")
+    List<Notification> findByTitleContainingCursor(
+            @Param("title") String title,
+            @Param("lastDate") String lastDate,
+            @Param("lastId") Long lastId,
+            Pageable pageable);
 
-    @Query(value = "SELECT * FROM notifications WHERE MATCH(title) AGAINST(:keyword IN BOOLEAN MODE)",
-           countQuery = "SELECT count(*) FROM notifications WHERE MATCH(title) AGAINST(:keyword IN BOOLEAN MODE)",
-           nativeQuery = true)
-    List<Notification> searchByFullText(@Param("keyword") String keyword, Pageable pageable);
+    @Query(value = "SELECT * FROM notifications " +
+            "WHERE MATCH(title) AGAINST(:keyword IN BOOLEAN MODE) " +
+            "AND (:lastDate IS NULL OR date < :lastDate OR (date = :lastDate AND id < :lastId)) " +
+            "ORDER BY date DESC, id DESC",
+            nativeQuery = true)
+    List<Notification> searchByFullTextCursor(
+            @Param("keyword") String keyword,
+            @Param("lastDate") String lastDate,
+            @Param("lastId") Long lastId,
+            Pageable pageable);
 }

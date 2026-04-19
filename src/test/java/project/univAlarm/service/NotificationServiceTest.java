@@ -71,7 +71,8 @@ class NotificationServiceTest {
     void searchNotificationsTest() {
         // Given
         String keyword = "공지";
-        int page = 0;
+        String lastDate = null;
+        Long lastId = null;
         
         School school = new School("가톨릭대학교", "성심");
         
@@ -81,11 +82,11 @@ class NotificationServiceTest {
         Notification notification = new Notification(type, crawledDto);
         ReflectionTestUtils.setField(notification, "id", 1L);
 
-        when(notificationRepository.findByTitleContaining(eq(keyword), any(Pageable.class)))
+        when(notificationRepository.findByTitleContainingCursor(eq(keyword), eq(lastDate), eq(lastId), any(Pageable.class)))
                 .thenReturn(List.of(notification));
 
         // When
-        List<NotificationResponseDto> results = notificationService.searchNotifications(keyword, page);
+        List<NotificationResponseDto> results = notificationService.searchNotifications(keyword, lastDate, lastId);
 
         // Then
         assertThat(results).isNotEmpty();
@@ -96,7 +97,8 @@ class NotificationServiceTest {
     void searchNotificationsV2Test() {
         // Given
         String keyword = "공지";
-        int page = 0;
+        String lastDate = null;
+        Long lastId = null;
         String processedKeyword = "+공지";
 
         School school = new School("가톨릭대학교", "성심");
@@ -105,11 +107,11 @@ class NotificationServiceTest {
         Notification notification = new Notification(type, crawledDto);
         ReflectionTestUtils.setField(notification, "id", 1L);
 
-        when(notificationRepository.searchByFullText(eq(processedKeyword), any(Pageable.class)))
+        when(notificationRepository.searchByFullTextCursor(eq(processedKeyword), eq(lastDate), eq(lastId), any(Pageable.class)))
                 .thenReturn(List.of(notification));
 
         // When
-        List<NotificationResponseDto> results = notificationService.searchNotificationsV2(keyword, page);
+        List<NotificationResponseDto> results = notificationService.searchNotificationsV2(keyword, lastDate, lastId);
 
         // Then
         assertThat(results).isNotEmpty();

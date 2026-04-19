@@ -17,20 +17,23 @@ public interface NotificationControllerDocs {
     @GetMapping
     public ResponseEntity<ApiResponse<List<NotificationResponseDto>>> getSubscribedNotifications(
             @AuthenticationPrincipal CustomUserDetails userDetails,
-            @RequestParam(defaultValue="0") int page
+            @RequestParam(required = false) String lastDate,
+            @RequestParam(required = false) Long lastId
     );
 
     @CustomOperation(summary = "공지사항 검색하기")
     @GetMapping("/search")
     public ResponseEntity<ApiResponse<List<NotificationResponseDto>>> searchNotifications(
             @RequestParam String keyword,
-            @RequestParam(defaultValue = "0") int page
+            @RequestParam(required = false) String lastDate,
+            @RequestParam(required = false) Long lastId
     );
 
     @CustomOperation(summary = "공지사항 검색하기 V2 (Full Text Search)")
     @GetMapping("/search/v2")
     public ResponseEntity<ApiResponse<List<NotificationResponseDto>>> searchNotificationsV2(
             @RequestParam String keyword,
-            @RequestParam(defaultValue = "0") int page
+            @RequestParam(required = false) String lastDate,
+            @RequestParam(required = false) Long lastId
     );
 }

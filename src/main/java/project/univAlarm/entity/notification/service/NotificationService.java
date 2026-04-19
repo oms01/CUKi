@@ -31,40 +31,36 @@ public class NotificationService {
 
 
     @Transactional(readOnly = true)
-    public List<NotificationResponseDto> findSubscribedNotificationByUser(Long userId, int page) {
+    public List<NotificationResponseDto> findSubscribedNotificationByUser(Long userId, String lastDate, Long lastId) {
         List<Subscription> subscriptionList = subscriptionRepository.findByUserId(userId);
         List<NotificationType> notificationTypeList = subscriptionList.stream().map(Subscription::getNotificationType).toList();
 
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
-        List<Notification> notifications = notificationRepository.findByNotificationTypeIn(notificationTypeList, pageable);
+        Pageable pageable = PageRequest.of(0, 10);
+        List<Notification> notifications = notificationRepository.findByNotificationTypeInCursor(notificationTypeList, lastDate, lastId, pageable);
         return notifications.stream()
                 .map(NotificationResponseDto::new)
                 .toList();
     }
 
     @Transactional(readOnly = true)
-    public List<NotificationResponseDto> searchNotifications(String keyword, int page) {
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
-        List<Notification> notifications = notificationRepository.findByTitleContaining(keyword, pageable);
+    public List<NotificationResponseDto> searchNotifications(String keyword, String lastDate, Long lastId) {
+        Pageable pageable = PageRequest.of(0, 10);
+        List<Notification> notifications = notificationRepository.findByTitleContainingCursor(keyword, lastDate, lastId, pageable);
         return notifications.stream()
                 .map(NotificationResponseDto::new)
                 .toList();
     }
 
     @Transactional(readOnly = true)
-    public List<NotificationResponseDto> searchNotificationsV2(String keyword, int page) {
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
+    public List<NotificationResponseDto> searchNotificationsV2(String keyword, String lastDate, Long lastId) {
+        Pageable pageable = PageRequest.of(0, 10);
         
-        // Full Text Search typically works better with tokens.
-        // For simplicity, we can wrap words with '+' for mandatory matching in Boolean Mode if needed,
-        // but here we'll pass the keyword as is, or with simple processing.
         String processedKeyword = keyword.trim();
         if (!processedKeyword.isEmpty()) {
-            // Simple logic: if multiple words, ensure they all match
             processedKeyword = "+" + processedKeyword.replace(" ", " +");
         }
 
-        List<Notification> notifications = notificationRepository.searchByFullText(processedKeyword, pageable);
+        List<Notification> notifications = notificationRepository.searchByFullTextCursor(processedKeyword, lastDate, lastId, pageable);
         return notifications.stream()
                 .map(NotificationResponseDto::new)
                 .toList();

@@ -21,7 +21,8 @@ import project.univAlarm.entity.notificationType.domain.NotificationType;
 @Entity
 @Table(name = "notifications",
         indexes = {
-                @Index(name = "idx_notification_type", columnList = "notification_type_id")
+                @Index(name = "idx_notification_type", columnList = "notification_type_id"),
+                @Index(name = "idx_date_id", columnList = "date, id")
         })
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

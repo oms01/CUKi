@@ -24,11 +24,12 @@ public class NotificationController implements NotificationControllerDocs {
     @GetMapping
     public ResponseEntity<ApiResponse<List<NotificationResponseDto>>> getSubscribedNotifications(
             @AuthenticationPrincipal CustomUserDetails userDetails,
-            @RequestParam(defaultValue="0") int page
+            @RequestParam(required = false) String lastDate,
+            @RequestParam(required = false) Long lastId
             ){
         Long userId = Long.valueOf(userDetails.getUsername());
         List<NotificationResponseDto> notificationList = notificationService.findSubscribedNotificationByUser(
-                userId, page);
+                userId, lastDate, lastId);
 
         return ApiResponse.ok(notificationList);
     }
@@ -36,18 +37,20 @@ public class NotificationController implements NotificationControllerDocs {
     @GetMapping("/search")
     public ResponseEntity<ApiResponse<List<NotificationResponseDto>>> searchNotifications(
             @RequestParam String keyword,
-            @RequestParam(defaultValue = "0") int page
+            @RequestParam(required = false) String lastDate,
+            @RequestParam(required = false) Long lastId
     ) {
-        List<NotificationResponseDto> notificationList = notificationService.searchNotifications(keyword, page);
+        List<NotificationResponseDto> notificationList = notificationService.searchNotifications(keyword, lastDate, lastId);
         return ApiResponse.ok(notificationList);
     }
 
     @GetMapping("/search/v2")
     public ResponseEntity<ApiResponse<List<NotificationResponseDto>>> searchNotificationsV2(
             @RequestParam String keyword,
-            @RequestParam(defaultValue = "0") int page
+            @RequestParam(required = false) String lastDate,
+            @RequestParam(required = false) Long lastId
     ) {
-        List<NotificationResponseDto> notificationList = notificationService.searchNotificationsV2(keyword, page);
+        List<NotificationResponseDto> notificationList = notificationService.searchNotificationsV2(keyword, lastDate, lastId);
         return ApiResponse.ok(notificationList);
     }
 }
